@@ -1,0 +1,8 @@
+username: cyberisuru
+password: CyberIsuru@Esol
+authorization_code: OXROOVdpcnpac1hyZEZ2eDFiOUVGZndpWGNzYTpCZmhpUXprdDl3XzVWTmZENDI0N2ZhdThxdGdh
+apis:
+  token_create: https://ideabiz.lk/apicall/token?grant_type=password&scope=PRODUCTION&
+  token_refresh: https://ideabiz.lk/apicall/token?grant_type=refresh_token&scope=PRODUCTION&
+  ilocator_get_current_location: https://ideabiz.lk/apicall/iLocate/v1/getCurrentLocation/715324145?
+  sms_send:  https://ideabiz.lk/apicall/smsmessaging/v3/outbound/94768887711/requests

@@ -1,0 +1,101 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * RouteInfo
+ *
+ * @ORM\Table(name="route_info", indexes={@ORM\Index(name="fk_route_info_start_point1_idx", columns={"start_point_id"}), @ORM\Index(name="fk_route_info_end_point1_idx", columns={"end_point_id"})})
+ * @ORM\Entity
+ */
+class RouteInfo
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=15, nullable=false)
+     */
+    private $code;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=30, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="start_point_lat", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $startPointLat;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="start_point_lng", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $startPointLng;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="end_point_lat", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $endPointLat;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="end_point_lng", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $endPointLng;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="route_id", type="string", length=30, nullable=false)
+     */
+    private $routeId;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="status", type="boolean", nullable=false)
+     */
+    private $status;
+
+    /**
+     * @var \StartPoint
+     *
+     * @ORM\ManyToOne(targetEntity="StartPoint")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="start_point_id", referencedColumnName="id")
+     * })
+     */
+    private $startPoint;
+
+    /**
+     * @var \EndPoint
+     *
+     * @ORM\ManyToOne(targetEntity="EndPoint")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="end_point_id", referencedColumnName="id")
+     * })
+     */
+    private $endPoint;
+
+
+}

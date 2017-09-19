@@ -1,0 +1,789 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
+/**
+ * CommonUser
+ *
+ * @ORM\Table(name="common_user", indexes={@ORM\Index(name="fk_common_user_route1_idx", columns={"route_id"}), @ORM\Index(name="fk_common_user_common_user_package1_idx", columns={"common_user_package_id"})})
+ * @ORM\Entity(repositoryClass="AppBundle\RepositoryORM\CommonUser")
+ * @UniqueEntity("email")
+ */
+class CommonUser implements UserInterface, \Serializable
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     * @Assert\NotBlank(message="not_blank")
+     * @ORM\Column(name="name", type="string", length=30, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     * @Assert\NotBlank(message="not_blank")
+     * @ORM\Column(name="contact", type="string", length=15, nullable=true)
+     */
+    private $contact;
+
+    /**
+     * @var string
+     * @Assert\NotBlank(message="not_blank")
+     * @ORM\Column(name="email", type="string", length=35, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     * @ORM\Column(name="username", type="string", length=100, nullable=true)
+     */
+    private $username;
+
+    /**
+     * @var string
+     * @ORM\Column(name="password", type="string", length=255, nullable=true)
+     */
+    private $password;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salt", type="string", length=255, nullable=false)
+     */
+    private $salt='1234';
+
+    /**
+     * @var string
+     * @Assert\NotBlank(message="not_blank")
+     * @ORM\Column(name="subscriber_id", type="string", length=30, nullable=false)
+     */
+    private $subscriberId;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="collect_point_lat", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $collectPointLat=12;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="collect_point_lng", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $collectPointLng=12;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="collect_point_hash_id", type="integer", nullable=true)
+     */
+    private $collectPointHashId;
+
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="assigned_point_lat", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $assignedPointLat;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="assigned_point_lng", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $assignedPointLng;
+
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="time_to_reach", type="float",nullable=true)
+     */
+    private $timeToReach;
+
+
+    /**
+     * @var \Route
+     * @Assert\NotBlank(message="not_blank")
+     * @MaxDepth(1)
+     * @ORM\ManyToOne(targetEntity="Route",cascade={"persist"})
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="route_id", referencedColumnName="id")
+     * })
+     */
+    private $route;
+
+    /**
+     * @var \CommonUserRole
+     * @Assert\NotBlank(message="not_blank")
+     * @MaxDepth(1)
+     * @ORM\ManyToOne(targetEntity="CommonUserRole",cascade={"persist"})
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="role_id", referencedColumnName="id")
+     * })
+     */
+    private $commonUserRole;
+
+    /**
+     * @var \CommonUserPackage
+     * @MaxDepth(1)
+     * @ORM\ManyToOne(targetEntity="CommonUserPackage",cascade={"persist"})
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="common_user_package_id", referencedColumnName="id")
+     * })
+     */
+    private $commonUserPackage;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="status", type="boolean", nullable=false)
+     */
+    private $status=true;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="email_confirm", type="boolean", nullable=false)
+     */
+    private $emailConfirm;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email_confirm_code", type="string", length=64, nullable=false)
+     */
+    private $emailConfirmCode;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="SMSCode", type="integer", nullable=false)
+     */
+    private $SMSCode;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="registration_status", type="boolean", nullable=false)
+     */
+    private $registrationStatus=true;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="notification_sent", type="boolean", nullable=false)
+     */
+    private $notificationSent=true;
+
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="gcm_code", type="string", length=1000, nullable=true)
+     */
+    private $gcmCode;
+
+    public function __construct()
+    {
+        $this->salt = bin2hex(openssl_random_pseudo_bytes(16));
+        $this->emailConfirm = 0;
+        $this->emailConfirmCode='';
+        $this->SMSCode=1234;
+        $this->registrationStatus=0;
+        $this->gcmCode=null;
+    }
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return CommonUser
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set contact
+     *
+     * @param string $contact
+     * @return CommonUser
+     */
+    public function setContact($contact)
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+
+    /**
+     * Get contact
+     *
+     * @return string
+     */
+    public function getContact()
+    {
+        return $this->contact;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return CommonUser
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     * @return CommonUser
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string 
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     * @return CommonUser
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string 
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     * @return CommonUser
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string 
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+
+
+    /**
+     * Set collectPointLat
+     *
+     * @param float $collectPointLat
+     * @return CommonUser
+     */
+    public function setCollectPointLat($collectPointLat)
+    {
+        $this->collectPointLat = $collectPointLat;
+
+        return $this;
+    }
+
+    /**
+     * Get collectPointLat
+     *
+     * @return float 
+     */
+    public function getCollectPointLat()
+    {
+        return $this->collectPointLat;
+    }
+
+    /**
+     * Set collectPointLng
+     *
+     * @param float $collectPointLng
+     * @return CommonUser
+     */
+    public function setCollectPointLng($collectPointLng)
+    {
+        $this->collectPointLng = $collectPointLng;
+
+        return $this;
+    }
+
+    /**
+     * Get collectPointLng
+     *
+     * @return float 
+     */
+    public function getCollectPointLng()
+    {
+        return $this->collectPointLng;
+    }
+
+    /**
+     * Set route
+     *
+     * @param \AppBundle\Entity\Route $route
+     * @return CommonUser
+     */
+    public function setRoute(\AppBundle\Entity\Route $route)
+    {
+        $this->route = $route;
+
+        return $this;
+    }
+
+    /**
+     * Get route
+     *
+     * @return \AppBundle\Entity\Route
+     */
+    public function getRoute()
+    {
+        return $this->route;
+    }
+
+    /**
+     * Set commonUserRole
+     *
+     * @param \AppBundle\Entity\CommonUserRole $commonUserRole
+     * @return CommonUser
+     */
+    public function setCommonUserRole(\AppBundle\Entity\CommonUserRole $commonUserRole = null)
+    {
+        $this->commonUserRole = $commonUserRole;
+
+        return $this;
+    }
+
+    /**
+     * Get commonUserRole
+     *
+     * @return \AppBundle\Entity\CommonUserRole 
+     */
+    public function getCommonUserRole()
+    {
+        return $this->commonUserRole;
+    }
+
+    /**
+     * Set subscriberId
+     *
+     * @param string $subscriberId
+     * @return CommonUser
+     */
+    public function setSubscriberId($subscriberId)
+    {
+        $this->subscriberId = $subscriberId;
+
+        return $this;
+    }
+
+    /**
+     * Get subscriberId
+     *
+     * @return string 
+     */
+    public function getSubscriberId()
+    {
+        return $this->subscriberId;
+    }
+
+    /**
+     * Set status
+     *
+     * @param boolean $status
+     * @return CommonUser
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return boolean
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_API_USER');
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+//             $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+//             $this->salt
+            ) = unserialize($serialized);
+    }
+
+    public function __toString()
+    {
+        return $this->id != null ? $this->getName() : 'New Record';
+    }
+
+    /**
+     * Set emailConfirm
+     *
+     * @param boolean $emailConfirm
+     * @return CommonUser
+     */
+    public function setEmailConfirm($emailConfirm)
+    {
+        $this->emailConfirm = $emailConfirm;
+
+        return $this;
+    }
+
+    /**
+     * Get emailConfirm
+     *
+     * @return boolean 
+     */
+    public function getEmailConfirm()
+    {
+        return $this->emailConfirm;
+    }
+
+    /**
+     * Set emailConfirmCode
+     *
+     * @param string $emailConfirmCode
+     * @return CommonUser
+     */
+    public function setEmailConfirmCode($emailConfirmCode)
+    {
+        $this->emailConfirmCode = $emailConfirmCode;
+
+        return $this;
+    }
+
+    /**
+     * Get emailConfirmCode
+     *
+     * @return string 
+     */
+    public function getEmailConfirmCode()
+    {
+        return $this->emailConfirmCode;
+    }
+
+    /**
+     * Set SMSCode
+     *
+     * @param integer $sMSCode
+     * @return CommonUser
+     */
+    public function setSMSCode($sMSCode)
+    {
+        $this->SMSCode = $sMSCode;
+
+        return $this;
+    }
+
+    /**
+     * Get SMSCode
+     *
+     * @return integer 
+     */
+    public function getSMSCode()
+    {
+        return $this->SMSCode;
+    }
+
+    /**
+     * Set registrationStatus
+     *
+     * @param boolean $registrationStatus
+     * @return CommonUser
+     */
+    public function setRegistrationStatus($registrationStatus)
+    {
+        $this->registrationStatus = $registrationStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get registrationStatus
+     *
+     * @return boolean 
+     */
+    public function getRegistrationStatus()
+    {
+        return $this->registrationStatus;
+    }
+
+    /**
+     * Set gcmCode
+     *
+     * @param string $gcmCode
+     * @return CommonUser
+     */
+    public function setGcmCode($gcmCode)
+    {
+        $this->gcmCode = $gcmCode;
+
+        return $this;
+    }
+
+    /**
+     * Get gcmCode
+     *
+     * @return string 
+     */
+    public function getGcmCode()
+    {
+        return $this->gcmCode;
+    }
+
+    /**
+     * Set commonUserPackage
+     *
+     * @param \AppBundle\Entity\CommonUsePrackage $commonUserPackage
+     * @return CommonUser
+     */
+    public function setCommonUserPackage(\AppBundle\Entity\CommonUserPackage $commonUserPackage = null)
+    {
+        $this->commonUserPackage = $commonUserPackage;
+
+        return $this;
+    }
+
+    /**
+     * Get commonUserPackage
+     *
+     * @return \AppBundle\Entity\CommonUserPackage
+     */
+    public function getCommonUserPackage()
+    {
+        return $this->commonUserPackage;
+    }
+
+    /**
+     * Set collectPointHashId
+     *
+     * @param integer $collectPointHashId
+     * @return CommonUser
+     */
+    public function setCollectPointHashId($collectPointHashId)
+    {
+        $this->collectPointHashId = $collectPointHashId;
+
+        return $this;
+    }
+
+    /**
+     * Get collectPointHashId
+     *
+     * @return integer 
+     */
+    public function getCollectPointHashId()
+    {
+        return $this->collectPointHashId;
+    }
+
+    /**
+     * Set timeToReach
+     *
+     * @param float $timeToReach
+     * @return CommonUser
+     */
+    public function setTimeToReach($timeToReach)
+    {
+        $this->timeToReach = $timeToReach;
+
+        return $this;
+    }
+
+    /**
+     * Get timeToReach
+     *
+     * @return float 
+     */
+    public function getTimeToReach()
+    {
+        return $this->timeToReach;
+    }
+
+    /**
+     * Set notificationSent
+     *
+     * @param boolean $notificationSent
+     * @return CommonUser
+     */
+    public function setNotificationSent($notificationSent)
+    {
+        $this->notificationSent = $notificationSent;
+
+        return $this;
+    }
+
+    /**
+     * Get notificationSent
+     *
+     * @return boolean 
+     */
+    public function getNotificationSent()
+    {
+        return $this->notificationSent;
+    }
+
+    /**
+     * Set assignedPointLat
+     *
+     * @param float $assignedPointLat
+     * @return CommonUser
+     */
+    public function setAssignedPointLat($assignedPointLat)
+    {
+        $this->assignedPointLat = $assignedPointLat;
+
+        return $this;
+    }
+
+    /**
+     * Get assignedPointLat
+     *
+     * @return float 
+     */
+    public function getAssignedPointLat()
+    {
+        return $this->assignedPointLat;
+    }
+
+    /**
+     * Set assignedPointLng
+     *
+     * @param float $assignedPointLng
+     * @return CommonUser
+     */
+    public function setAssignedPointLng($assignedPointLng)
+    {
+        $this->assignedPointLng = $assignedPointLng;
+
+        return $this;
+    }
+
+    /**
+     * Get assignedPointLng
+     *
+     * @return float 
+     */
+    public function getAssignedPointLng()
+    {
+        return $this->assignedPointLng;
+    }
+}
