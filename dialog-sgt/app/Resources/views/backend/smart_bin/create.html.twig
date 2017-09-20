@@ -1,0 +1,138 @@
+{% extends 'backend/base.html.twig' %}
+{% trans_default_domain "backend" %}
+{% block javascripts %}
+    {{ parent() }}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type="text/javascript">
+        jQuery.validator.addMethod('confirmPwCheck',function (value,element) {
+            return value != '' && value == $('#app_bundle_smart_bin_password').val()
+        },'{% trans %}smart_bin_info_smart_bin_password_confirm_msg{% endtrans %}');
+
+        validationRules["app_bundle_smart_bin[passwordConfirm]"] = {confirmPwCheck:true};
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.weekday').select2();
+        })
+    </script>
+{% endblock %}
+{% block content %}
+    {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
+    <div class="panel-body">
+        <div class="form-group">
+            {{ form_label(form.serial ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.serial,{'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form.serial) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.route ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.route,{'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form.route) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.description ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.description,{'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.user ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.user,{'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form.user) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.userEmail ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.userEmail,{'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form.userEmail) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.userMobileOne ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.userMobileOne,{'attr':{'class':'form-control', 'placeholder' : '+947XXXXXXXX'}}) }}
+                {{ form_errors(form.userMobileOne) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.userMobileTwo ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.userMobileTwo,{'attr':{'class':'form-control', 'placeholder' : '+947XXXXXXXX'}}) }}
+                {{ form_errors(form.userMobileTwo) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.userMobileThree ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.userMobileThree,{'attr':{'class':'form-control', 'placeholder' : '+947XXXXXXXX'}}) }}
+                {{ form_errors(form.userMobileThree) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.userAddress ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.userAddress,{'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form.userAddress) }}
+            </div>
+        </div>
+        {#<div class="form-group">#}
+            {#{{ form_label(form.smartBinBinLevelEvent ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}#}
+            {#<div class="col-md-6">#}
+                {#{{ form_widget(form.smartBinBinLevelEvent,{'attr':{'class':'form-control'}}) }}#}
+                {#{{ form_errors(form.smartBinBinLevelEvent) }}#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="form-group">#}
+            {#{{ form_label(form.smartBinBatLevelEvent ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}#}
+            {#<div class="col-md-6">#}
+                {#{{ form_widget(form.smartBinBatLevelEvent,{'attr':{'class':'form-control'}}) }}#}
+                {#{{ form_errors(form.smartBinBatLevelEvent) }}#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="form-group">#}
+            {#{{ form_label(form.batteryLevel ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}#}
+            {#<div class="col-md-6">#}
+                {#{{ form_widget(form.batteryLevel,{'attr':{'class':'form-control'}}) }}#}
+                {#{{ form_errors(form.batteryLevel) }}#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="form-group">#}
+            {#{{ form_label(form.binLevel ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}#}
+            {#<div class="col-md-6">#}
+                {#{{ form_widget(form.binLevel,{'attr':{'class':'form-control'}}) }}#}
+                {#{{ form_errors(form.binLevel) }}#}
+            {#</div>#}
+        {#</div>#}
+    </div>
+    {#<footer class="panel-footer">#}
+    {#<div class="row">#}
+
+    {#<div class="col-sm-9 col-sm-offset-7">#}
+    {#<button type="reset" class="btn btn-default">Cancel</button>#}
+    {#<a href="{{ path('app_driver_list') }}" class="btn btn-default">Cancel</button>#}
+
+    {#{{ form_widget(form.save,{'attr':{'class':'btn btn-primary'}}) }}#}
+    {#</div>#}
+    {#</div>#}
+
+    {#</footer>#}
+
+    <footer class="panel-footer">
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-7">
+                <a href="{{ path('app_smart_bin_list') }}" class="btn btn-default">Cancel</a>
+                {{ form_widget(form.save,{'attr':{'class':'btn btn-primary'}}) }}
+            </div>
+        </div>
+    </footer>
+    {{ form_end(form) }}
+    {#{{  form(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
+{% endblock %}

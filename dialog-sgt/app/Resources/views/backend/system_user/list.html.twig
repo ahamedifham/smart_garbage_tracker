@@ -1,0 +1,9 @@
+{% extends 'backend/base.html.twig' %}
+{% block content %}
+    {% block search %}
+        {% include 'backend/system_user/list_search.html.twig' %}
+    {% endblock %}
+    {% block show %}
+        {% include 'backend/system_user/list_table.html.twig' %}
+    {% endblock %}
+{% endblock %}

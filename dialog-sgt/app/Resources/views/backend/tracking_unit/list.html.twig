@@ -1,0 +1,84 @@
+{% extends 'backend/base.html.twig' %}
+{% trans_default_domain "backend" %}
+
+{% block content %}
+    {% block search %}
+        {% include 'backend/tracking_unit/list_search.html.twig' %}
+    {% endblock %}
+    {% block show %}
+        {% include 'backend/tracking_unit/list_table.html.twig' %}
+    {% endblock %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC-XxdWX3BWu-wE33Yf41K6R-v2ncRJgvk"></script>
+    <script type="text/javascript">
+        var mapConfig = {
+            icons:{
+                pins:{
+                    red: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|7575FE",
+                    green: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|75FE75",
+                    blue: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|7575FE"
+                },
+                startPoint: "{{ asset('backend/assets/images/maps/startpoint.png') }}",
+                endPoint: "{{ asset('backend/assets/images/maps/endRoute.png') }}",
+                collectionPoint: "{{ asset('backend/assets/images/maps/pinPoint.png') }}",
+                routePoint: "{{ asset('backend/assets/images/maps/worldwide.png') }}",
+                destinationPoint: "{{ asset('backend/assets/images/maps/flag.png') }}",
+                deletePoint: "{{ asset('backend/assets/images/maps/deletePoint.png') }}",
+                dumpPoint:  "{{ asset('backend/assets/images/maps/dumpPoint.png') }}",
+                recyclingPoint:  "{{ asset('backend/assets/images/maps/recyclePoint.png') }}",
+
+            }
+        };
+        var myCenter=new google.maps.LatLng(6.798153,80.915838);
+        var mapProp = {
+            center:myCenter,
+            zoom:4,
+            styles: [
+                {
+                    featureType: 'road',
+                    elementType: 'geometry',
+                    stylers: [
+                        { lightness: 100 },
+                        { visibility: 'simplified' }
+                    ]
+                },{
+                    featureType: 'road',
+                    elementType: 'labels.icon',
+                    stylers: [
+                        { visibility: 'off' }
+                    ]
+                }, {
+                    featureType: "landscape",
+                    elementType: "labels",
+                    stylers: [
+                        { visibility: "off" }
+                    ]
+                }, {
+                    featureType: "poi.business",
+                    elementType: "all",
+                    stylers: [
+                        { visibility: "off" }
+                    ]
+                } , {
+                    featureType: "transit.station.bus",
+                    elementType: "all",
+                    stylers: [
+                        { visibility: "off" }
+                    ]
+                }
+            ],
+            mapTypeId:google.maps.MapTypeId.ROADMAP
+        };
+
+        var pathRouteId = '{{ path('app_tracking_unit_route_id') }}';
+        var pathShow = '{{ path('app_mongo_fetch_route') }}';
+        var dumpShow = '{{ path('app_mongo_fetch_dump') }}';
+        var recyclingShow ='{{ path('app_mongo_fetch_recycling') }}';
+
+
+    </script>
+    <script type="text/javascript" src="{{ asset('backend/assets/javascripts/map/map_ui_handle_base.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('backend/assets/javascripts/tracking_unit/tracking_unit_events.js') }}"></script>
+{% endblock %}

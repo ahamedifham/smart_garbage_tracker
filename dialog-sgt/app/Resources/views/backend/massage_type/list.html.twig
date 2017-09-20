@@ -1,0 +1,41 @@
+{% extends 'backend/base.html.twig' %}
+{% block content %}
+    {% block search %}
+        {% include 'backend/massage_type/list_search.html.twig' %}
+    {% endblock %}
+    {% block show %}
+        {% include 'backend/massage_type/list_table.html.twig' %}
+    {% endblock %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC-XxdWX3BWu-wE33Yf41K6R-v2ncRJgvk"></script>
+    <script type="text/javascript">
+        var mapConfig = {
+            icons:{
+                pins:{
+                    red: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|7575FE",
+                    green: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|75FE75",
+                    blue: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|7575FE"
+                },
+                startPoint: "{{ asset('backend/assets/images/maps/startpoint.png') }}",
+                endPoint: "{{ asset('backend/assets/images/maps/endRoute.png') }}",
+                collectionPoint: "{{ asset('backend/assets/images/maps/pinPoint.png') }}",
+                routePoint: "{{ asset('backend/assets/images/maps/worldwide.png') }}",
+                destinationPoint: "{{ asset('backend/assets/images/maps/flag.png') }}",
+                deletePoint: "{{ asset('backend/assets/images/maps/deletePoint.png') }}",
+                dumpPoint:  "{{ asset('backend/assets/images/maps/dumpPoint.png') }}",
+                recyclingPoint:  "{{ asset('backend/assets/images/maps/recyclePoint.png') }}",
+
+            }
+        };
+        var myCenter=new google.maps.LatLng(6.842226,79.926438);
+        var mapProp = {
+            center:myCenter,
+            zoom:15,
+            mapTypeId:google.maps.MapTypeId.ROADMAP
+        };
+    </script>
+    <script type="text/javascript" src="{{ asset('backend/assets/javascripts/map/map_ui_handle_base.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('backend/assets/javascripts/route_info/route_info_events.js') }}"></script>
+{% endblock %}

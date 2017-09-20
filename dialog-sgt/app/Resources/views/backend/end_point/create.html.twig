@@ -1,0 +1,57 @@
+{% extends 'backend/base.html.twig' %}
+{% trans_default_domain "backend" %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        jQuery.validator.addMethod('confirmPwCheck',function (value,element) {
+            return value != '' && value == $('#app_bundle_end_point_password').val()
+        },'{% trans %}end_point_info_end_point_password_confirm_msg{% endtrans %}');
+
+        validationRules["app_bundle_end_point[passwordConfirm]"] = {confirmPwCheck:true};
+    </script>
+{% endblock %}
+{% block content %}
+    {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
+    <div class="panel-body">
+        <div class="form-group">
+            {{ form_label(form.name ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.name,{'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form.name) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.description ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.description,{'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+        </div>
+        {#<div class="form-group">#}
+            {#{{ form_label(form.lat ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}#}
+            {#<div class="col-md-6">#}
+                {#{{ form_widget(form.lat,{'attr':{'class':'form-control'}}) }}#}
+                {#{{ form_errors(form.lat) }}#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="form-group">#}
+            {#{{ form_label(form.lng ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}#}
+            {#<div class="col-md-6">#}
+                {#{{ form_widget(form.lng,{'attr':{'class':'form-control'}}) }}#}
+                {#{{ form_errors(form.lng) }}#}
+            {#</div>#}
+        {#</div>#}
+
+    </div>
+    <footer class="panel-footer">
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-7">
+                <a href="{{ path('app_end_point_list') }}" class="btn btn-default">Cancel</a>
+                {{ form_widget(form.save,{'attr':{'class':'btn btn-primary'}}) }}
+            </div>
+        </div>
+
+    </footer>
+    {{ form_end(form) }}
+    {#{{  form(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
+{% endblock %}

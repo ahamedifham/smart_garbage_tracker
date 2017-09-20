@@ -1,0 +1,8 @@
+{#TODO extend this from the base#}
+<html>
+    <body>
+    {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+
+    </body>
+</html>

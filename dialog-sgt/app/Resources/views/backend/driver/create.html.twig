@@ -1,0 +1,90 @@
+{% extends 'backend/base.html.twig' %}
+{% trans_default_domain "backend" %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        jQuery.validator.addMethod('confirmPwCheck',function (value,element) {
+            return value != '' && value == $('#app_bundle_driver_password').val()
+        },'{% trans %}driver_info_driver_password_confirm_msg{% endtrans %}');
+
+        validationRules["app_bundle_driver[passwordConfirm]"] = {confirmPwCheck:true};
+    </script>
+{% endblock %}
+{% block content %}
+    {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
+    <div class="panel-body">
+        <div class="form-group">
+            {{ form_label(form.name ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.name,{'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form.name) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.contact ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.contact,{'attr':{'class':'form-control', 'placeholder' : '+947XXXXXXXX'}}) }}
+                {{ form_errors(form.contact) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.subscriberId ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.subscriberId,{'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form.subscriberId) }}
+            </div>
+        </div>
+        {#<div class="form-group">#}
+            {#{{ form_label(form.username ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}#}
+            {#<div class="col-md-6">#}
+                {#{{ form_widget(form.username,{'attr':{'class':'form-control'}}) }}#}
+                {#{{ form_errors(form.username) }}#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="form-group">#}
+            {#{{ form_label(form.password ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}#}
+            {#<div class="col-md-6">#}
+                {#{{ form_widget(form.password,{'attr':{'class':'form-control'}}) }}#}
+                {#{{ form_errors(form.password) }}#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="form-group">#}
+            {#{{ form_label(form.passwordConfirm ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}#}
+            {#<div class="col-md-6">#}
+                {#{{ form_widget(form.passwordConfirm,{'attr':{'class':'form-control'}}) }}#}
+                {#{{ form_errors(form.passwordConfirm) }}#}
+            {#</div>#}
+        {#</div>#}
+        <div class="form-group">
+            {{ form_label(form.ownerCompany ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.ownerCompany,{'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form.ownerCompany) }}
+            </div>
+        </div>
+    </div>
+    {#<footer class="panel-footer">#}
+        {#<div class="row">#}
+
+            {#<div class="col-sm-9 col-sm-offset-7">#}
+                {#<button type="reset" class="btn btn-default">Cancel</button>#}
+                {#<a href="{{ path('app_driver_list') }}" class="btn btn-default">Cancel</button>#}
+
+                {#{{ form_widget(form.save,{'attr':{'class':'btn btn-primary'}}) }}#}
+            {#</div>#}
+        {#</div>#}
+
+    {#</footer>#}
+
+    <footer class="panel-footer">
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-7">
+                <a href="{{ path('app_driver_list') }}" class="btn btn-default">Cancel</a>
+                {{ form_widget(form.save,{'attr':{'class':'btn btn-primary'}}) }}
+            </div>
+        </div>
+
+    </footer>
+    {{ form_end(form) }}
+    {#{{  form(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
+{% endblock %}

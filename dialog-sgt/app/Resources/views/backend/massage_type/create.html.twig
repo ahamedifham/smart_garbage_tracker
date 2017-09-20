@@ -1,0 +1,62 @@
+{% extends 'backend/base.html.twig' %}
+{% trans_default_domain "backend" %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        jQuery.validator.addMethod('confirmPwCheck',function (value,element) {
+            return value != '' && value == $('#app_bundle_massage_type_password').val()
+        },'{% trans %}massage_type_info_massage_type_password_confirm_msg{% endtrans %}');
+
+        validationRules["app_bundle_massage_type[passwordConfirm]"] = {confirmPwCheck:true};
+    </script>
+{% endblock %}
+{% block content %}
+    {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
+    <div class="panel-body">
+        <div class="form-group">
+            {{ form_label(form.medium ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.medium,{'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form.medium) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.category ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.category,{'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form.category) }}
+            </div>
+        </div>
+        {#<div class="form-group">#}
+            {#{{ form_label(form.successor ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}#}
+            {#<div class="col-md-6">#}
+                {#{{ form_widget(form.successor,{'attr':{'class':'form-control'}}) }}#}
+                {#{{ form_errors(form.successor) }}#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="form-group">#}
+            {#{{ form_label(form.lng ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}#}
+            {#<div class="col-md-6">#}
+                {#{{ form_widget(form.lng,{'attr':{'class':'form-control'}}) }}#}
+                {#{{ form_errors(form.lng) }}#}
+            {#</div>#}
+        {#</div>#}
+        {% for index,language in languages %}
+            <label for="{{ language.name }}">{{ language.name }}</label>
+            <textarea class="form-control" name="msgContents[]">{% if massages is defined %} {{ attribute(massages,index) }}{% endif %}</textarea>
+        {% endfor %}
+    </div>
+    <footer class="panel-footer">
+        <div class="row">
+
+            <div class="col-sm-9 col-sm-offset-7">
+                <a href="{{ path('app_massage_type_list') }}" class="btn btn-default">Cancel</a>
+                {{ form_widget(form.save,{'attr':{'class':'btn btn-primary'}}) }}
+            </div>
+        </div>
+
+    </footer>
+    {{ form_end(form) }}
+
+    {#{{  form(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
+{% endblock %}

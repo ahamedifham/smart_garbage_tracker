@@ -1,0 +1,28 @@
+{#TODO extend this from the base#}
+<html>
+<body>
+<table>
+    <thead>
+        <tr>
+            <th>MSISDN</th>
+            <th>Vehicle</th>
+            <th>Driver</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in list %}
+        <tr>
+            <td>{{ record.msisdn }}</td>
+            <td>{{ record.vehicle }}</td>
+            <td>{{ record.driver }}</td>
+            <td>
+                <a href="{{ url('app_tracking_unit_edit',{id: record.id}) }}">Edit</a>
+                <a href="{{ url('app_tracking_unit_delete',{id: record.id}) }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

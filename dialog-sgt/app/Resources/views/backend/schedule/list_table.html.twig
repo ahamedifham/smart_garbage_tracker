@@ -1,0 +1,56 @@
+{% trans_default_domain "backend" %}
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            {#<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>#}
+            {#<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>#}
+        </div>
+
+        <h2 class="panel-title">{% trans %}Schedule Information{% endtrans %}</h2>
+    </header>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped mb-none" id="datatable-default">
+            <thead>
+            <tr>
+                <th>{% trans %}schedule_info_schedule_name{% endtrans %}</th>
+                <th>{% trans %}schedule_info_schedule_driver{% endtrans %}</th>
+                <th>{% trans %}schedule_info_schedule_route{% endtrans %}</th>
+                <th>{% trans %}schedule_info_schedule_truck{% endtrans %}</th>
+                {#<th>{% trans %}schedule_info_schedule_supervisor{% endtrans %}</th>#}
+                <th>{% trans %}schedule_info_schedule_description{% endtrans %}</th>
+                <th>{% trans %}schedule_info_schedule_date{% endtrans %}</th>
+                <th>{% trans %}schedule_info_schedule_weekday{% endtrans %}</th>
+                <th>{% trans %}schedule_info_schedule_start_time{% endtrans %}</th>
+                <th>{% trans %}schedule_info_schedule_end_time{% endtrans %}</th>
+                {#<th>{% trans %}schedule_info_schedule_repeat{% endtrans %}</th>#}
+                <th>{% trans %}action_list{% endtrans %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for record in list %}
+                <tr>
+                    <td>{{ record.name }}</td>
+                    <td>{{ record.driver}}</td>
+                    <td>{{ record.route }}</td>
+                    <td>{{ record.truck }}</td>
+                    {#<td>{{ record.supervisor }}</td>#}
+                    <td>{{ record.description }}</td>
+                    <td>{{ record.date|date('Y-m-d') }}</td>
+                    <td>{% for day in record.weekday %}{{ day }} {% endfor %}</td>
+                    <td>{{ record.startTime|date('H:i:s')}}</td>
+                    <td>{{ record.endTime|date('H:i:s')}}</td>
+                    {#<td>{{ record.repeat1 }}</td>#}
+
+                    <td>
+                        <a href="{{ url('app_schedule_edit',{id: record.id}) }}"class="btn btn-default btn-sm" style="max-height: 50px; min-width: 70px;">
+                            <i class="fa fa-edit"> </i> {% trans %} edit{% endtrans %}</a>
+                        <a href="{{ url('app_schedule_delete',{id: record.id}) }}"class="btn btn-default btn-sm" style="max-height: 50px; min-width: 70px;">
+                            <i class="fa fa-close"> </i> {% trans %} delete{% endtrans %}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</section>

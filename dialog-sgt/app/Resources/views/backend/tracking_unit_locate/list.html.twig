@@ -1,0 +1,9 @@
+{% extends 'backend/base.html.twig' %}
+{% block content %}
+    {% block search %}
+        {% include 'backend/tracking_unit_locate/list_search.html.twig' %}
+    {% endblock %}
+    {% block show %}
+        {% include 'backend/tracking_unit_locate/list_table.html.twig' %}
+    {% endblock %}
+{% endblock %}

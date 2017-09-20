@@ -1,0 +1,132 @@
+{#{% extends 'backend/base.html.twig' %}#}
+{#{% block googleMap %}#}
+    {#<h1>My First Google Map Check</h1>#}
+{#<div id="googleMap" style="width:100%;height:500px" ></div>#}
+    {#{% endblock %}#}
+{#{% block javascripts %}#}
+    {#{{ parent() }}#}
+    {#<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC-XxdWX3BWu-wE33Yf41K6R-v2ncRJgvk"></script>#}
+    {#<script type="text/javascript">#}
+        {#//        var mapCenterLat;#}
+        {#//        var mapCenterLng;#}
+
+        {#var mapConfig = {#}
+            {#icons:{#}
+                {#pins:{#}
+                    {#red: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|7575FE",#}
+                    {#green: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|75FE75",#}
+                    {#blue: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|7575FE"#}
+                {#},#}
+                {#startPoint: "{{ asset('backend/assets/images/maps/startpoint.png') }}",#}
+                {#endPoint: "{{ asset('backend/assets/images/maps/endRoute.png') }}",#}
+                {#collectionPoint: "{{ asset('backend/assets/images/maps/pinPoint.png') }}",#}
+                {#routePoint: "{{ asset('backend/assets/images/maps/worldwide.png') }}",#}
+                {#destinationPoint: "{{ asset('backend/assets/images/maps/flag.png') }}",#}
+                {#deletePoint: "{{ asset('backend/assets/images/maps/deletePoint.png') }}",#}
+                {#dumpPoint:  "{{ asset('backend/assets/images/maps/dumpPoint.png') }}",#}
+                {#recyclingPoint:  "{{ asset('backend/assets/images/maps/recyclePoint.png') }}",#}
+
+            {#}#}
+        {#};#}
+        {#var myCenter=new google.maps.LatLng(6.842226,79.926438);#}
+        {#//        console.log(mapCenterLat);#}
+        {#//        console.log(mapCenterLng);#}
+        {#//  var myCenter=new google.maps.LatLng(mapCenterLat,mapCenterLng);#}
+        {#var mapProp = {#}
+            {#center:myCenter,#}
+            {#zoom:15,#}
+            {#//mapTypeId:google.maps.MapTypeId.ROADMAP#}
+            {#styles: [#}
+                {#{#}
+                    {#featureType: 'road',#}
+                    {#elementType: 'geometry',#}
+                    {#stylers: [#}
+                        {#{ lightness: 100 },#}
+                        {#{ visibility: 'simplified' }#}
+                    {#]#}
+                {#},{#}
+                    {#featureType: 'road',#}
+                    {#elementType: 'labels.icon',#}
+                    {#stylers: [#}
+                        {#{ visibility: 'off' }#}
+                    {#]#}
+                {#}, {#}
+                    {#featureType: "landscape",#}
+                    {#elementType: "labels",#}
+                    {#stylers: [#}
+                        {#{ visibility: "off" }#}
+                    {#]#}
+                {#}, {#}
+                    {#featureType: "poi.business",#}
+                    {#elementType: "all",#}
+                    {#stylers: [#}
+                        {#{ visibility: "off" }#}
+                    {#]#}
+                {#} , {#}
+                    {#featureType: "transit.station.bus",#}
+                    {#elementType: "all",#}
+                    {#stylers: [#}
+                        {#{ visibility: "off" }#}
+                    {#]#}
+                {#}#}
+            {#],#}
+        {#};#}
+        {#var pathCreate = '{{ path('app_mongo_create_loop') }}';#}
+        {#var pathShow = '{{ path('app_mongo_fetch_route') }}';#}
+        {#var pathUpdate = '{{ path('app_mongo_route_update') }}';#}
+        {#var pathGetRouteId =  '{{ path('app_route_find_id') }}';#}
+        {#var updateRouteId = '{{ path('app_route_update_id') }}';#}
+        {#var dumpShow = '{{ path('app_mongo_fetch_dump') }}';#}
+        {#var recyclingShow ='{{ path('app_mongo_fetch_recycling') }}';#}
+
+    {#</script>#}
+    {#<script type="text/javascript" src="{{ asset('backend/assets/javascripts/map/map_ui_handle_base.js') }}"></script>#}
+    {#<script type="text/javascript" src="{{ asset('backend/assets/javascripts/route_info/route_info_api.js') }}"></script>#}
+{#{% endblock %}#}
+<html>
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script src="{{asset('backend/assets/vendor/jquery/jquery.js')}}"></script>
+{#<script src="{{asset('backend/assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js')}}"></script>#}
+<script>
+ var routeCountPath= '{{ path('app_route_count') }}';
+ var pathGetRouteId =  '{{ path('app_route_find_id') }}';
+    var showPath = '{{ path('app_mongo_fetch_path') }}';
+ var showDumpPoints = '{{ path('app_mongo_fetch_dump') }}';
+    var routeId;
+ var routeIdArray=[];
+ var routeCount;
+ var map;
+ var path = [];
+    var rectangle;
+ var routesIdsInsideBox = [];
+    var finalizedRouteIds=[];
+ var flag;
+ var myCenter = new google.maps.LatLng(60.842226, 79.926438);
+
+</script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-XxdWX3BWu-wE33Yf41K6R-v2ncRJgvk&callback=initMap"
+        async defer></script>
+<script type="text/javascript" src="{{ asset('backend/assets/javascripts/route_info/route_info_api.js') }}"></script>
+<script type="text/javascript" src="{{ asset('backend/assets/javascripts/route_info/route_info_api_proceed.js') }}"></script>
+
+</body>
+</html>
+

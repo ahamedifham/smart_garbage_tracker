@@ -1,0 +1,220 @@
+{% trans_default_domain "backend" %}
+<!DOCTYPE html>
+<html class="fixed">
+    <head>
+
+        <meta charset="UTF-8">
+
+        <title>{% trans %}admin_title{% endtrans %}</title>
+        <meta name="keywords" content="HTML5 Admin Template" />
+        <meta name="description" content="Porto Admin - Responsive HTML5 Template">
+        <meta name="author" content="okler.net">
+
+        <!-- Mobile Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        {% block javascripts %}
+            {#'@TetranzSelect2EntityBundle/Resources/public/js/select2entity.js'#}
+            <script src="{{ asset('backend/assets/vendor/modernizr/modernizr.js') }}"></script>
+
+            <script src="{{asset('backend/assets/vendor/jquery/jquery.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/bootstrap/js/bootstrap.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/nanoscroller/nanoscroller.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/magnific-popup/jquery.magnific-popup.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jquery-placeholder/jquery-placeholder.js')}}"></script>
+
+            <!-- Specific Page Vendor -->
+            <script src="{{asset('backend/assets/vendor/jquery-ui/jquery-ui.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jqueryui-touch-punch/jqueryui-touch-punch.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jquery-appear/jquery-appear.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/flot/jquery.flot.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/flot.tooltip/flot.tooltip.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/flot/jquery.flot.pie.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/flot/jquery.flot.categories.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/flot/jquery.flot.resize.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jquery-sparkline/jquery-sparkline.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/raphael/raphael.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/morris.js/morris.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/gauge/gauge.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/snap.svg/snap.svg.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/liquid-meter/liquid.meter.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jqvmap/jquery.vmap.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jqvmap/data/jquery.vmap.sampledata.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jqvmap/maps/jquery.vmap.world.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jqvmap/maps/continents/jquery.vmap.africa.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jqvmap/maps/continents/jquery.vmap.asia.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jqvmap/maps/continents/jquery.vmap.australia.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jqvmap/maps/continents/jquery.vmap.europe.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jqvmap/maps/continents/jquery.vmap.north-america.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jqvmap/maps/continents/jquery.vmap.south-america.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jquery-validation/jquery.validate.min.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/jquery-validation/additional-methods.min.js')}}"></script>
+
+            <!-- Specific Page Vendor -->
+            <script src="{{asset('backend/assets/vendor/autosize/autosize.js')}}"></script>
+            <script src="{{asset('backend/assets/vendor/bootstrap-fileupload/bootstrap-fileupload.min.js')}}"></script>
+            {#<script src="{{ asset('bundles/tetranzselect2entity/js/select2entity.js') }}"></script>#}
+            <script type="text/javascript">
+                var validationRules  = {};
+            </script>
+        {% endblock %}
+
+        {% block stylesheets %}
+            <!-- Mobile Metas -->
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+            <!-- Web Fonts  -->
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+            <!-- Vendor CSS -->
+            <link rel="stylesheet" href="{{ asset('backend/assets/vendor/bootstrap/css/bootstrap.min.css') }}" />
+
+            <link rel="stylesheet" href="{{ asset('backend/assets/vendor/font-awesome/css/font-awesome.css') }}" />
+            <link rel="stylesheet" href="{{ asset('backend/assets/vendor/magnific-popup/magnific-popup.css') }}" />
+            <link rel="stylesheet" href="{{ asset('backend/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css') }}" />
+
+            <!-- Specific Page Vendor CSS -->
+            <link rel="stylesheet" href="{{ asset('backend/assets/vendor/jquery-ui/jquery-ui.css') }}" />
+            <link rel="stylesheet" href="{{ asset('backend/assets/vendor/jquery-ui/jquery-ui.theme.css') }}" />
+            <link rel="stylesheet" href="{{ asset('backend/assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css') }}" />
+            <!-- Specific Page Vendor for Charts -->
+            <link rel="stylesheet" href="{{ asset('backend/assets/vendor/morris.js/morris.css') }}" />
+            <!-- Specific Page Vendor for Forms -->
+            <link rel="stylesheet" href="{{ asset('backend/assets/vendor/bootstrap-fileupload/bootstrap-fileupload.min.css')}}" />
+            <!-- Theme CSS -->
+            <link rel="stylesheet" href="{{ asset('backend/assets/stylesheets/theme.css') }}" />
+
+            <!-- Skin CSS -->
+            <link rel="stylesheet" href="{{ asset('backend/assets/stylesheets/skins/default.css') }}" />
+
+            <!-- Theme Custom CSS -->
+            <link rel="stylesheet" href="{{ asset('backend/assets/stylesheets/theme-custom.css') }}">
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+        <section class="body">
+            {% block menu_top %}
+                {% include 'backend/menu_top.html.twig' %}
+            {% endblock %}
+            <div class="inner-wrapper">
+                {% block menu_left %}
+                    {% include 'backend/menu_left.html.twig' %}
+                {% endblock %}
+
+                <section role="main" class="content-body">
+                    {% block breacrum %}
+                        <header class="page-header">
+                            {#TODO replace the folloing title with proper vars #}
+                            <h2>{{ page_title|trans }}</h2>
+
+                            {#<div class="right-wrapper pull-right">#}
+                                {#<ol class="breadcrumbs">#}
+                                    {#<li>#}
+                                        {#<a href="#">#}
+                                            {#<i class="fa fa-tasks"></i>                                        </a>#}
+                                    {#</li>#}
+                                    {#TODO replace the folloing navigation indicators with proper vars #}
+                                    {#<li><span>Forms</span></li>#}
+                                    {#<li><span>Basic</span></li>#}
+                                {#</ol>#}
+
+                                {#<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>#}
+                            {#</div>#}
+                        </header>
+                    {% endblock %}
+                    {% block content %}
+                    {% endblock %}
+                </section>
+
+                {% block footer %}
+
+                <div id ="footer" class="footer panel-footer" align="center">
+                {#<div id ="footer" class="footer" align="center" style="position: inherit; bottom:0 ; left:0 ; right:0; ">#}
+                    Dialog Axiata PLC. All Rights reserved.
+                    </div>
+                {% endblock %}
+            </div>
+        </section>
+        {% endblock %}
+        <!-- Theme Base, Components and Settings -->
+        <script src="{{asset('backend/assets/javascripts/theme.js')}}"></script>
+
+        <!-- Theme Custom -->
+        <script src="{{asset('backend/assets/javascripts/theme.custom.js')}}"></script>
+
+        <!-- Theme Initialization Files -->
+        <script src="{{asset('backend/assets/javascripts/theme.init.js')}}"></script>
+
+        <!--dash board chart -->
+        <script src="{{asset('backend/assets/dashboard/examples.dashboard.js')}}"></script>
+
+        <script type="text/javascript">
+            $('#data_entry_form').validate({
+                rules: validationRules
+            });
+        </script>
+        {% block map_js %}{% endblock %}
+    </body>
+</html>
+
+
+
+{#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#}
+{#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#}
+{#@@                                                                                                                             @@#}
+{#@@                                                                                                                             @@#}
+{#@@                                                                                                                             @@#}
+{#@@                                                                                                                             @@#}
+{#@@                                                                                                                             @@#}
+{#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@                                   @                                                                                         @@#}
+{#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#}
+{#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#}
+{#@@                                                                                                                             @@#}
+{#@@                                                                                                                             @@#}
+{#@@                                                                                                                             @@#}
+{#@@                                                                                                                             @@#}
+{#@@                                                                                                                             @@#}
+{#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#}
+{#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@         #}

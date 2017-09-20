@@ -1,0 +1,9 @@
+{% extends 'backend/base.html.twig' %}
+{% block content %}
+    {% block search %}
+        {% include 'backend/driver/list_search.html.twig' %}
+    {% endblock %}
+    {% block show %}
+        {% include 'backend/driver/list_table.html.twig' %}
+    {% endblock %}
+{% endblock %}

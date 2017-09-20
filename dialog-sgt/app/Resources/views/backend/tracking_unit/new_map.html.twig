@@ -1,0 +1,55 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block content %}
+    <div id="googleMap" style="min-height:650px;"></div>
+{% endblock %}
+
+{% block map_js %}
+    <script type="text/javascript">
+        var id = '{{ location.id }}';
+        var name = '{{ location.name }}';
+        var lat = '{{ location.lat }}';
+        var lng = '{{ location.lng }}';
+
+        function initMap() {
+
+            var userLocationImg = {
+                url: '{{ asset('Images/truck_1.png') }}', // url
+                scaledSize: new google.maps.Size(28, 32), // scaled size
+                origin: new google.maps.Point(0,0), // origin
+                anchor: new google.maps.Point(0, 0) // anchor
+            };
+            var geocoder = new google.maps.Geocoder();
+            var map = new google.maps.Map(document.getElementById('googleMap'), {
+                zoom: 8
+            });
+            geocoder.geocode( {'address' : 'Sri Lanka'}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    map.setCenter(results[0].geometry.location);
+                }
+            });
+            var marker;
+            setInterval(function () {
+                console.log(id);
+                $.post('{{ url('app_dashboard_get_single_truck_location') }}',{id:id},function (reply) {
+                    reply = JSON.parse(reply);
+                    if(marker){
+                        marker.setMap(null);
+                    }
+                    var infowindow = new google.maps.InfoWindow();
+                    var uluru = {lat: reply.lat, lng: reply.lng};
+                    marker = new google.maps.Marker({
+                        position: uluru,
+                        map: map,
+                    });
+                    marker.setIcon(userLocationImg);
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.setContent('<div><strong>' + reply.name + '<br>'+'</div>');
+                        infowindow.open(map, this);
+                    });
+                });
+            },2000);
+        }
+    </script>
+    <script async defer src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC-XxdWX3BWu-wE33Yf41K6R-v2ncRJgvk&callback=initMap"></script>
+{% endblock %}

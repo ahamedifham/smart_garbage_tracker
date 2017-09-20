@@ -1,0 +1,40 @@
+{#TODO extend this from the base#}
+<html>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Salt</th>
+        <th>Subscriber ID</th>
+        <th>Col Pnt Lat</th>
+        <th>COl Pnt Lng</th>
+        <th>Route info ID</th>
+        <th>Common User Role ID</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for record in list %}
+        <tr>
+            <td>{{ record.name }}</td>
+            <td>{{ record.username }}</td>
+            <td>{{ record.password }}</td>
+            <td>{{ record.salt }}</td>
+            <td>{{ record.substriberId }}</td>
+            <td>{{ record.collectPointLat }}</td>
+            <td>{{ record.collectPointLng }}</td>
+            <td>{{ record.routeInfo }}</td>
+            <td>{{ record.commonUserRole }}</td>
+            <td>
+                <a href="{{ url('common_user_form_edit',{id: record.id}) }}">Edit</a>
+                <a href="{{ url('common_user_form_delete',{id: record.id}) }}">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

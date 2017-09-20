@@ -1,0 +1,130 @@
+{% extends 'backend/base.html.twig' %}
+{% block menu_top %}
+{% endblock %}
+    {% block menu_left %}
+    {% endblock %}
+    {% block breacrum %}
+
+    {% endblock %}
+    {% block body %}
+    <div class="container" style="margin-left: 80px" >
+        <div class="row">
+            <div  class=" col-md-8" style="margin-top: 64px;padding-right: 0px" >
+                <div class="panel-body" style="float: right">
+                    <img src="{{ asset('backend/assets/images/image_in_login.png') }}" height="438" width="700" />
+                </div>
+            </div>
+            <div  class=" col-md-4 " style="margin-top: 64px;float: left" >
+                <div class="panel-body">
+                    <div style="float: right; padding-bottom: 20px;">
+                        <img src="{{ asset('backend/assets/images/img-truck.png') }}" height="75"  />
+                    </div>
+                    <div class="row" >
+                        <div class="col-md-12">
+                            <form action="{{ path('app_backend_login') }}" method="post">
+                                {#<label for="username">Username:</label>#}
+                                <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control input-sm chat-input" placeholder="username"/>
+                                </br>
+                                {#<label for="password">Password:</label>#}
+                                <input type="password" id="password" name="_password" class="form-control input-sm chat-input" placeholder="password"/>
+                                </br>
+                                {#
+                                    If you want to control the URL the user
+                                    is redirected to on success (more details below)
+                                    <input type="hidden" name="_target_path" value="/account" />
+                                #}
+                                <div class="wrapper">
+                                    {% if error %}
+                                        <div class="text-danger"  style="float: left">
+                                            <strong>Login Error : </strong>
+                                            {{ error.messageKey|trans(error.messageData, 'security') }}
+                                        </div>
+                                    {% endif %}
+                                    <span class="group-btn">
+                                            <button type="submit" style="float: right" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-12"style="margin-top:30px">
+                        <div class="row">
+                            <div class="col-md-2" style="margin-top: 16px">
+                                <img src="{{ asset('backend/assets/images/login_img_1.png') }}" height="35"  />
+                            </div>
+                            <div class="col-md-10">
+                                <h4 style="float: left;margin-bottom: 0px;padding-bottom: 0px"> Define a New Route</h4>
+                                <h6 style="float: left;margin-top: 0px"> Defining new routes adding new dump points and trucks</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2" style="margin-top: 16px">
+                                <img src="{{ asset('backend/assets/images/login_img_2.png') }}" height="35"  />
+                            </div>
+                            <div class="col-md-10">
+                                <h4 style="float: left;margin-bottom: 0px;padding-bottom: 0px"> Measure Driver performance </h4>
+                                <h6 style="float: left;margin-top: 0px"> Monitor periodic level of service provided by the drivers</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2" style="margin-top: 16px">
+                                <img src="{{ asset('backend/assets/images/login_img_3.png') }}" height="35"  />
+                            </div>
+                            <div class="col-md-10">
+                                <h4 style="float: left;margin-bottom: 0px;padding-bottom: 0px"> Manage User Complaint</h4>
+                                <h6 style="float: left;margin-top: 0px"> To being a bridge between driver and users</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        @import url(http://fonts.googleapis.com/css?family=Roboto:400);
+        body {
+            background-color:#fff;
+            -webkit-font-smoothing: antialiased;
+            font: normal 14px Roboto,arial,sans-serif;
+        }
+
+        .container {
+            padding: 25px;
+            position: fixed;
+        }
+
+        .form-login {
+            background-color: #EDEDED;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 15px;
+            border-color:#d2d2d2;
+            border-width: 5px;
+            box-shadow:0 1px 0 #cfcfcf;
+        }
+
+        h4 {
+            border:0 solid #fff;
+            border-bottom-width:1px;
+            padding-bottom:10px;
+            text-align: center;
+        }
+
+        .form-control {
+            border-radius: 10px;
+        }
+
+        .wrapper {
+            text-align: center;
+        }
+
+    </style>
+{% endblock %}

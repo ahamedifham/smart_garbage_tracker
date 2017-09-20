@@ -1,0 +1,83 @@
+{% extends 'backend/base.html.twig' %}
+{% trans_default_domain "backend" %}
+{% block javascripts %}
+    {{ parent() }}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type="text/javascript">
+        jQuery.validator.addMethod('confirmPwCheck',function (value,element) {
+            return value != '' && value == $('#app_bundle_complaints_password').val()
+        },'{% trans %}complaints_info_complaints_password_confirm_msg{% endtrans %}');
+
+        validationRules["app_bundle_complaints[passwordConfirm]"] = {confirmPwCheck:true};
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.weekday').select2();
+        })
+    </script>
+{% endblock %}
+{% block content %}
+    {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
+    <div class="panel-body">
+        <div class="form-group">
+            {{ form_label(form.commonUser ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.commonUser,{'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form.commonUser) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.date ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.date,{'attr':{'class':''}}) }}
+                {{ form_errors(form.date) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.time ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.time,{'attr':{'class':''}}) }}
+                {{ form_errors(form.time) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.description ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.description,{'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+        </div>
+        {#<div class="form-group">#}
+            {#{{ form_label(form.isRead ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}#}
+            {#<div class="col-md-6">#}
+                {#{{ form_widget(form.isRead,{'attr':{'class':'form-control'}}) }}#}
+                {#{{ form_errors(form.isRead) }}#}
+            {#</div>#}
+        {#</div>#}
+    </div>
+    {#<footer class="panel-footer">#}
+    {#<div class="row">#}
+
+    {#<div class="col-sm-9 col-sm-offset-7">#}
+    {#<button type="reset" class="btn btn-default">Cancel</button>#}
+    {#<a href="{{ path('app_driver_list') }}" class="btn btn-default">Cancel</button>#}
+
+    {#{{ form_widget(form.save,{'attr':{'class':'btn btn-primary'}}) }}#}
+    {#</div>#}
+    {#</div>#}
+
+    {#</footer>#}
+
+    <footer class="panel-footer">
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-7">
+                <a href="{{ path('app_complaints_list') }}" class="btn btn-default">Cancel</a>
+                {{ form_widget(form.save,{'attr':{'class':'btn btn-primary'}}) }}
+            </div>
+        </div>
+
+    </footer>
+    {{ form_end(form) }}
+    {#{{  form(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
+{% endblock %}

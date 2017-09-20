@@ -1,0 +1,315 @@
+{% trans_default_domain "backend" %}
+
+<aside id="sidebar-left" class="sidebar-left">
+
+    <div class="sidebar-header">
+        <div class="sidebar-title">
+            Navigation
+        </div>
+        <div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+            <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+        </div>
+    </div>
+
+
+    <div class="nano">
+        <div class="nano-content">
+            <nav id="menu" class="nav-main" role="navigation">
+                <ul class="nav nav-main">
+                    <li class="{% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_dashboard') %}nav-active {% endif %}">
+                        <a href="{{ url('app_dashboard') }}">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class=" nav-main {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_schedule_list') %}nav-active {% endif %}
+                    {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_schedule_create')
+                    or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_schedule_list')%} nav-expanded{% endif %}">
+                        <a href="{{ url('app_schedule_list') }}">
+                            <i class="glyphicon glyphicon-calendar" aria-hidden="true"></i>
+                            <span> Schedule</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_create') %}nav-active {% endif %}">#}
+                            {#<a href="{{ url('app_tracking_unit_create') }}"><i class="glyphicon glyphicon-plus"></i>Add a Truck</a>#}
+                            {#</li>#}
+                            {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_list') %}nav-active {% endif %}">#}
+                            {#<a><i class="fa fa-map-signs"></i>ASSIGN ROUTE</a>#}
+                            {#</li>#}
+
+                        </ul>
+                    </li>
+                    {#Navigation Panel for Route Information Starts here#}
+                    <li class="nav-parent nav-expanded {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_route_create')
+                    or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_route_list')
+                    or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_end_point_create')
+                    or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_end_point_list') %} nav-active{% endif %}">
+
+                        <a>
+                            <i class="glyphicon glyphicon-road" aria-hidden="true"></i>
+                            <span>Route Information</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            {#<li>#}
+                                {#<a>First Level</a>#}
+                            {#</li>#}
+                            {#Important Recycling Point Uncomment#}
+                            {#<li class="nav-main {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_end_point_create')#}
+                            {#or  app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_end_point_list')%} nav-expanded nav-active{% endif %}">#}
+                                {#<a href="{{ url('app_end_point_list')}}"><i class="fa fa-recycle"></i>Recycling Points</a>#}
+                                {#<ul class="nav nav-children">#}
+
+                                    {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_end_point_create') %}nav-active {% endif %}">#}
+                                        {#<a href="{{ url('app_end_point_create') }}"><i class="glyphicon glyphicon-plus"></i> Add Recycling Point</a>#}
+                                    {#</li>#}
+                                    {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_end_point_list') %}nav-active {% endif %}">#}
+                                        {#<a href="{{ url('app_end_point_list')}}"><i class="glyphicon glyphicon-th-list"></i>List Recycling Points</a>#}
+                                    {#</li>#}
+                                {#</ul>#}
+                            {#</li>#}
+                            <li class="nav-main {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_route_create')
+                            or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_route_list')%}nav-expanded nav-active{% endif %}">
+                            <a href="{{ url('app_route_list')}}"><i class="fa fa-map-marker"></i>Routes</a>
+                                <ul class="nav nav-children">
+
+                                    {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_route_create') %}nav-active {% endif %}">#}
+                                        {#<a href="{{ url('app_route_create') }}"><i class="glyphicon glyphicon-plus"></i> Add</a>#}
+                                    {#</li>#}
+                                    {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_route_list') %}nav-active {% endif %}">#}
+                                        {#<a href="{{ url('app_route_list')}}"><i class="glyphicon glyphicon-th-list"></i>List</a>#}
+                                    {#</li>#}
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    {#Navigation Panel for Truck Information Starts here#}
+                    <li class=" nav-main {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_list') %}nav-active {% endif %}
+                    {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_create')
+                    or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_list')%} nav-expanded{% endif %}">
+                        <a href="{{ url('app_tracking_unit_list') }}">
+                            <i class="fa fa-truck" aria-hidden="true"></i>
+                            <span> Truck Information</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_create') %}nav-active {% endif %}">#}
+                                {#<a href="{{ url('app_tracking_unit_create') }}"><i class="glyphicon glyphicon-plus"></i>Add a Truck</a>#}
+                            {#</li>#}
+                            {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_list') %}nav-active {% endif %}">#}
+                                {#<a><i class="fa fa-map-signs"></i>ASSIGN ROUTE</a>#}
+                            {#</li>#}
+
+                        </ul>
+                    </li>
+                    <li class=" nav-main {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_smart_bin_list') %}nav-active {% endif %}
+                    {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_smart_bin_create')
+                    or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_smart_bin_list')%} nav-expanded{% endif %}">
+                        <a href="{{ url('app_smart_bin_list') }}">
+                            <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                            <span> Smart Bin</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_create') %}nav-active {% endif %}">#}
+                                {#<a href="{{ url('app_tracking_unit_create') }}"><i class="glyphicon glyphicon-plus"></i>Add a Truck</a>#}
+                            {#</li>#}
+                            {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_list') %}nav-active {% endif %}">#}
+                                {#<a><i class="fa fa-map-signs"></i>ASSIGN ROUTE</a>#}
+                            {#</li>#}
+
+                        </ul>
+                    </li>
+                    {#Navigation Panel for User Management Starts here#}
+                    <li class="nav-parent nav-expanded {% if
+                    app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_common_user_list')
+                    or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_driver_create')
+                    or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_driver_list')
+                    or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_system_user_create')
+                    or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_system_user_list') %} nav-active{% endif %}">
+                        <a >
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <span>User Management</span>
+                        </a>
+                        <ul class="nav nav-children ">
+                            {#<li>#}
+                                {#<a>Common User</a>#}
+                            {#</li>#}
+                            <li class="nav-main {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_common_user_list') %}nav-active {% endif %}
+                            {% if
+                            app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_common_user_list')%} nav-expanded{% endif %}">
+                            <a href="{{ url('app_common_user_list') }}"><i class="fa fa-user"></i> User</a>
+                                <ul class="nav nav-children">
+
+                                    {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_common_user_create') %}nav-active {% endif %}">#}
+                                        {#<a href="{{ url('app_common_user_create') }}"><i class="glyphicon glyphicon-plus"></i>Add New Common User</a>#}
+                                    {#</li>#}
+                                    {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_common_user_list') %}nav-active {% endif %}">#}
+                                        {#<a href="{{ url('app_common_user_list') }}"><i class="glyphicon glyphicon-th-list"></i>List Common Users</a>#}
+                                    {#</li>#}
+                                </ul>
+                            </li>
+                            <li class="nav-main {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_driver_list') %}nav-active {% endif %}
+                                {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_driver_create')
+                                or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_driver_list')%}nav-expanded {% endif %}">
+                                <a  href="{{ url('app_driver_list') }}"><i class="fa fa-user"></i> Driver</a>
+                                <ul class="nav nav-children">
+
+                                    {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_driver_create') %}nav-active {% endif %}">#}
+                                        {#<a href="{{ url('app_driver_create') }}"><i class="glyphicon glyphicon-plus"></i>Add New Driver</a>#}
+                                    {#</li>#}
+                                    {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_driver_list') %}nav-active {% endif %}">#}
+                                        {#<a href="{{ url('app_driver_list') }}"><i class="glyphicon glyphicon-th-list"></i>List Drivers</a>#}
+                                    {#</li>#}
+                                </ul>
+                            </li>
+                            <li class="nav-main {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_system_user_list') %}nav-active {% endif %}
+                            {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_system_user_create')
+                            or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_system_user_list') %}nav-expanded {% endif %}">
+                                <a  href="{{ url('app_system_user_list') }}"><i class="fa fa-user"></i> Administrators</a>
+                                <ul class="nav nav-children">
+
+                                    {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_system_user_create') %} nav-active {% endif %}">#}
+                                        {#<a href="{{ url('app_system_user_create') }}"><i class="glyphicon glyphicon-plus"></i>Add</a>#}
+                                    {#</li>#}
+                                    {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_system_user_list') %}nav-active {% endif %}">#}
+                                        {#<a href="{{ url('app_system_user_list') }}"><i class="glyphicon glyphicon-th-list"></i>List</a>#}
+                                    {#</li>#}
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    {#<li class=" nav-main {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_massage_type_list') %}nav-active {% endif %}#}
+                    {#{% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_massage_type_create')#}
+                    {#or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_massage_type_list')%} nav-expanded{% endif %}">#}
+                        {#<a href="{{ url('app_massage_type_list') }}">#}
+                            {#<i class="glyphicon glyphicon-bell" aria-hidden="true"></i>#}
+                            {#<span> Alert Management</span>#}
+                        {#</a>#}
+                        {#<ul class="nav nav-children">#}
+                            {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_create') %}nav-active {% endif %}">#}
+                            {#<a href="{{ url('app_tracking_unit_create') }}"><i class="glyphicon glyphicon-plus"></i>Add a Truck</a>#}
+                            {#</li>#}
+                            {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_list') %}nav-active {% endif %}">#}
+                            {#<a><i class="fa fa-map-signs"></i>ASSIGN ROUTE</a>#}
+                            {#</li>#}
+
+                        {#</ul>#}
+                    {#</li>#}
+
+                    <li class=" nav-main {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_alert_generation_list') %}nav-active {% endif %}
+                    {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_alert_generation_create')
+                    or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_alert_generation_list')%} nav-expanded{% endif %}">
+                        <a href="{{ url('app_alert_generation_list') }}">
+                            <i class="glyphicon glyphicon-bell" aria-hidden="true"></i>
+                            <span> Alert Generation</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_create') %}nav-active {% endif %}">#}
+                            {#<a href="{{ url('app_tracking_unit_create') }}"><i class="glyphicon glyphicon-plus"></i>Add a Truck</a>#}
+                            {#</li>#}
+                            {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_list') %}nav-active {% endif %}">#}
+                            {#<a><i class="fa fa-map-signs"></i>ASSIGN ROUTE</a>#}
+                            {#</li>#}
+
+                        </ul>
+                    </li>
+
+
+                    {#Navigation Panel for Feedback Starts here#}
+                    <li class="nav-parent nav-expanded {% if  app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_common_user_feedback_list')
+
+                    or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_driver_feedback_list') %} nav-active{% endif %}">
+                        <a >
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <span> Feedback </span>
+                        </a>
+                        <ul class="nav nav-children ">
+                            {#<li>#}
+                            {#<a>Common User</a>#}
+                            {#</li>#}
+                            <li class="nav-main {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_common_user_feedback_list') %}nav-active {% endif %}
+                            {% if  app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_common_user_feedback_list')%} nav-expanded{% endif %}">
+                                <a href="{{ url('app_common_user_feedback_list') }}"><i class="fa fa-user"></i> User Feedback</a>
+                                <ul class="nav nav-children">
+
+                                    {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_common_user_create') %}nav-active {% endif %}">#}
+                                    {#<a href="{{ url('app_common_user_create') }}"><i class="glyphicon glyphicon-plus"></i>Add New Common User</a>#}
+                                    {#</li>#}
+                                    {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_common_user_list') %}nav-active {% endif %}">#}
+                                    {#<a href="{{ url('app_common_user_list') }}"><i class="glyphicon glyphicon-th-list"></i>List Common Users</a>#}
+                                    {#</li>#}
+                                </ul>
+                            </li>
+                            <li class="nav-main {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_driver_feedback_list') %}nav-active {% endif %}
+                                {% if  app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_driver_feedback_list')%}nav-expanded {% endif %}">
+                                <a  href="{{ url('app_driver_feedback_list') }}"><i class="fa fa-user"></i> Driver Feedback</a>
+                                <ul class="nav nav-children">
+
+                                    {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_driver_create') %}nav-active {% endif %}">#}
+                                    {#<a href="{{ url('app_driver_create') }}"><i class="glyphicon glyphicon-plus"></i>Add New Driver</a>#}
+                                    {#</li>#}
+                                    {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_driver_list') %}nav-active {% endif %}">#}
+                                    {#<a href="{{ url('app_driver_list') }}"><i class="glyphicon glyphicon-th-list"></i>List Drivers</a>#}
+                                    {#</li>#}
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class=" nav-main {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_common_user_package_list') %}nav-active {% endif %}
+                    {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_common_user_package_create')
+                    or app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_common_user_package_list')%} nav-expanded{% endif %}">
+                        <a href="{{ url('app_common_user_package_list') }}">
+                            <i class="glyphicon glyphicon-briefcase" aria-hidden="true"></i>
+                            <span> User Package</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_create') %}nav-active {% endif %}">#}
+                            {#<a href="{{ url('app_tracking_unit_create') }}"><i class="glyphicon glyphicon-plus"></i>Add a Truck</a>#}
+                            {#</li>#}
+                            {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_list') %}nav-active {% endif %}">#}
+                            {#<a><i class="fa fa-map-signs"></i>ASSIGN ROUTE</a>#}
+                            {#</li>#}
+
+                        </ul>
+                    </li>
+
+                    {#Navigation Panel for Scheduling Starts here#}
+
+
+                    {#<li class="nav-main">#}
+                        {#<a><i class="fa fa-thumbs-down" aria-hidden="true"></i><span>Manage Complaints</span></a>#}
+                    {#</li>#}
+
+                    <li class=" nav-main {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_complaints_list') %}nav-active {% endif %}
+                    {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_complaints_list')%} nav-expanded{% endif %}">
+                        <a href="{{ url('app_complaints_list') }}">
+                            <i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i>
+                            <span> Complaints Management</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_create') %}nav-active {% endif %}">#}
+                            {#<a href="{{ url('app_tracking_unit_create') }}"><i class="glyphicon glyphicon-plus"></i>Add a Truck</a>#}
+                            {#</li>#}
+                            {#<li class="nav-parent {% if app.request.schemeAndHttpHost~path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) ==  url('app_tracking_unit_list') %}nav-active {% endif %}">#}
+                            {#<a><i class="fa fa-map-signs"></i>ASSIGN ROUTE</a>#}
+                            {#</li>#}
+
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <script>
+            // Preserve Scroll Position
+            if (typeof localStorage !== 'undefined') {
+                if (localStorage.getItem('sidebar-left-position') !== null) {
+                    var initialPosition = localStorage.getItem('sidebar-left-position'),
+                            sidebarLeft = document.querySelector('#sidebar-left .nano-content');
+
+                    sidebarLeft.scrollTop = initialPosition;
+                }
+            }
+        </script>
+    </div>
+</aside>

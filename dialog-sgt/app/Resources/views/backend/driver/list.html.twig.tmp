@@ -1,0 +1,37 @@
+{#TODO extend this from the base#}
+<html>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Driver_Col</th>
+        <th>Subscriber_Id</th>
+        <th>Driver_Col1</th>
+        <th>Password</th>
+        <th>Salt</th>
+        <th>Owner_Company</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for record in list %}
+        <tr>
+            <td>{{ record.name }}</td>
+            <td>{{ record.drivercol}}</td>
+            <td>{{ record.subscriberId }}</td>
+            <td>{{ record.drivercol1 }}</td>
+            <td>{{ record.password }}</td>
+            <td>{{ record.salt }}</td>
+            <td>{{ record.ownerCompany }}</td>
+            <td>
+                <a href="{{ url('driver_form_edit',{id: record.id}) }}">Edit</a>
+                <a href="{{ url('driver_form_delete',{id: record.id}) }}">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
+

@@ -1,0 +1,44 @@
+{% trans_default_domain "backend" %}
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            {#<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>#}
+            {#<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>#}
+        </div>
+
+        <h2 class="panel-title">{% trans %}Tracking Unit Locate Information{% endtrans %}</h2>
+    </header>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped mb-none" id="datatable-default">
+            <thead>
+            <tr>
+                <th>{% trans %}tracking_unit_locate_info_tracking_unit_locate_name{% endtrans %}</th>
+                <th>{% trans %}tracking_unit_locate_info_tracking_unit_locate_route{% endtrans %}</th>
+                <th>{% trans %}tracking_unit_locate_info_tracking_unit_locate_truck{% endtrans %}</th>
+                <th>{% trans %}tracking_unit_locate_info_tracking_unit_locate_lat{% endtrans %}</th>
+                <th>{% trans %}tracking_unit_locate_info_tracking_unit_locate_lng{% endtrans %}</th>
+                <th>{% trans %}action_list{% endtrans %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for record in list %}
+                <tr>
+                    <td>{{ record.name }}</td>
+                    <td>{{ record.route }}</td>
+                    <td>{{ record.truck }}</td>
+                    <td>{{ record.lat }}</td>
+                    <td>{{ record.lng }}</td>
+
+                    <td>
+                        <a href="{{ url('app_tracking_unit_locate_edit',{id: record.id}) }}"class="btn btn-default btn-sm">
+                            <i class="fa fa-edit"> </i> {% trans %} edit{% endtrans %}</a>
+                        <a href="{{ url('app_tracking_unit_locate_delete',{id: record.id}) }}"class="btn btn-default btn-sm">
+                            <i class="fa fa-close"> </i> {% trans %} delete{% endtrans %}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</section>

@@ -1,0 +1,86 @@
+{% trans_default_domain "backend" %}
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            {#<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>#}
+            {#<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>#}
+        </div>
+
+        <h2 class="panel-title">{% trans %}route_info_list{% endtrans %}</h2>
+    </header>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped mb-none" id="datatable-default">
+            <thead>
+            <tr>
+                <th>{% trans %}route_info_info_route_info_code{% endtrans %}</th>
+                <th>{% trans %}route_info_info_route_info_name{% endtrans %}</th>
+                <th>{% trans %}route_info_info_route_info_routeId{% endtrans %}</th>
+                <th>{% trans %}route_info_info_route_info_startPoint{% endtrans %}</th>
+                <th>{% trans %}route_info_info_owner_endPoint{% endtrans %}</th>
+                <th>{% trans %}action_list{% endtrans %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for record in list %}
+                <tr>
+                    <td>{{ record.code }}</td>
+                    <td>{{ record.name}}</td>
+                    <td>{{ record.routeId}}</td>
+                    <td>{{ record.startPoint }}</td>
+                    <td>{{ record.endPoint }}</td>
+                    <td>
+                        <a class="mb-xs mt-xs mr-xs modal-sizes btn btn-default btn-sm map_button" href="#mapModal">
+                            <i class="glyphicon glyphicon-map-marker"></i> Map</a>
+                        <a href="{{ url('app_route_edit',{id: record.id}) }}"class="btn btn-default btn-sm">
+                            <i class="fa fa-edit"></i> Edit</a>
+                        <a href="{{ url('app_route_delete',{id: record.id}) }}"class="btn btn-default btn-sm">
+                            <i class="fa fa-close"></i> {% trans %}Delete{% endtrans %}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</section>
+
+<div id="mapModal" class="modal-block modal-block-full mfp-hide">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">
+                Map Panel
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default btn-hover-me button:active menu_toolbar_tool start_point" data-tool-name="startPoint">
+                        <img src="{{ asset('backend/assets/images/maps/startRoute.png') }}" style="height:20px;width:20px;"> Start Point</button>
+                    <button type="button" class="btn btn-default btn-hover-me menu_toolbar_tool collection_point" data-tool-name="collectionPoint">
+                        <img src="{{ asset('backend/assets/images/maps/pinPoint.png') }}" style="height:20px;width:20px;">Collection Point</button>
+                    <button type="button" class="btn btn-default btn-hover-me menu_toolbar_tool end_point" data-tool-name="endPoint">
+                        <img src="{{ asset('backend/assets/images/maps/endRoute.png') }}" style="height:20px;width:20px;">End Point</button>
+                    <button type="button" class="btn btn-default btn-hover-me menu_toolbar_tool" data-tool-name="dumpPoint">
+                        <img src="{{ asset('backend/assets/images/maps/dumpPoint.png') }}" style="height:20px;width:20px;">Dump Point</button>
+                    <button type="button" class="btn btn-default btn-hover-me menu_toolbar_tool" data-tool-name="recyclingPoint">
+                        <img src="{{ asset('backend/assets/images/maps/recyclePoint.png') }}" style="height:20px;width:20px;"> Recycling Point</button>
+                    <button id="bbbbb" type="button" class="btn btn-default btn-hover-me menu_toolbar_tool delete_marker " data-tool-name="deletePoint">
+                        <img src="{{ asset('backend/assets/images/maps/holderRemover.png') }}" style="height:20px;width:20px;"> Delete Point</button>
+
+                </div>
+            </h2>
+        </header>
+        <div id="mapModalBody" class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-text">
+                    <div id="googleMap" style="height:750px;" class=" col-centered panel-body "><span class="close">Close</span></div>
+
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-primary modal-confirm">Confirm</button>
+                    <button class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>

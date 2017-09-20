@@ -1,0 +1,100 @@
+
+{% extends 'backend/base.html.twig' %}
+{% block content %}
+
+    <div id="googleMap" style="width:500px;height:380px;"></div>
+    <script
+            src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC-XxdWX3BWu-wE33Yf41K6R-v2ncRJgvk">
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var myCenter=new google.maps.LatLng(2,-0.120850);
+            var markers = [];
+            var map;
+            function initialize()
+            {
+                var mapProp = {
+                    center:myCenter,
+                    zoom:5,
+                    mapTypeId:google.maps.MapTypeId.ROADMAP
+                };
+
+                map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+                var marker=new google.maps.Marker({
+                    position:myCenter,
+                });
+
+                marker.setMap(map);
+
+                //LISTENING TO CLICK EVENT AND ADD MARKER
+
+//                map.event.addListener(map,"click",function (event) {
+//                    addMarker(event.latLng);
+//                });
+
+                //Add the initial marker
+
+                addMarker(myCenter);
+
+                google.maps.event.addListener(map, 'click', function(event) {
+                    placeMarker(event.latLng);
+                });
+
+            }
+
+            function addMarker(location) {
+                var marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+                markers.push(marker);
+            }
+
+
+            function placeMarker(location) {
+                var marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+                markers.push(marker);
+            }
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+            return markers;
+        });
+
+    </script>
+
+    {#<div class="map table">#}
+        {#<table id="map table">#}
+            {#<thead>#}
+            {#<tr>#}
+                {#<th>{% trans %}latitude{% endtrans %}</th>#}
+                {#<th>{% trans %}longitude{% endtrans %}</th>#}
+            {#</tr>#}
+            {#</thead>#}
+            {#<tbody>#}
+            {#{% for record in markers %}#}
+            {#<tr>#}
+                {#<td>{{ record.lat }}</td>#}
+                {#<td>{{ record.lng }}</td>#}
+            {#</tr>#}
+            {#{% endfor %}#}
+            {#</tbody>#}
+        {#</table>#}
+    {#</div>#}
+
+    <div class="btn btn-sm" id="map_button">
+        <i class="fa fa-close"></i>{% trans %}place_marker{% endtrans %}
+    </div>
+
+
+
+
+
+{% endblock %}
+
+
+

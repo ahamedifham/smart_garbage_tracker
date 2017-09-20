@@ -1,0 +1,79 @@
+{% extends 'backend/base.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        jQuery.validator.addMethod('confirmPwCheck',function (value,element) {
+            return value != '' && value == $('#app_bundle_tracking_unit_password').val()
+        },'{% trans %}tracking_unit_info_tracking_unit_password_confirm_msg{% endtrans %}');
+
+        validationRules["app_bundle_tracking_unit[passwordConfirm]"] = {confirmPwCheck:true};
+    </script>
+{% endblock %}
+{% block content %}
+    {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
+        <div class="panel-body">
+            <div class="form-group">
+                {{ form_label(form.msisdn ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+                <div class="col-md-6">
+                    {{ form_widget(form.msisdn,{'attr':{'class':'form-control'}}) }}
+                    {{ form_errors(form.msisdn) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.vehicle.vehicleNo ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+                <div class="col-md-6">
+                    {{ form_widget(form.vehicle.vehicleNo,{'attr':{'class':'form-control'}}) }}
+                    {{ form_errors(form.vehicle.vehicleNo) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.vehicle.vehicleBrand ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+                <div class="col-md-6">
+                    {{ form_widget(form.vehicle.vehicleBrand,{'attr':{'class':'form-control'}}) }}
+                    {{ form_errors(form.vehicle.vehicleBrand) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.vehicle.capacity ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+                <div class="col-md-6">
+                    {{ form_widget(form.vehicle.capacity,{'attr':{'class':'form-control'}}) }}
+                    {{ form_errors(form.vehicle.capacity) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.driver ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+                <div class="col-md-6">
+                    {{ form_widget(form.driver,{'attr':{'class':'form-control'}}) }}
+                    {{ form_errors(form.driver) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.route ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+                <div class="col-md-6">
+                    {{ form_widget(form.route,{'attr':{'class':'form-control'}}) }}
+                    {{ form_errors(form.route) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.ownerCompany ,null,{'label_attr':{'class':'col-md-3 control-label'}}) }}
+                <div class="col-md-6">
+                    {{ form_widget(form.ownerCompany,{'attr':{'class':'form-control'}}) }}
+                    {{ form_errors(form.ownerCompany) }}
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+
+                <div class="col-sm-9 col-sm-offset-7">
+                    {#<button type="reset" class="btn btn-default">Cancel</button>#}
+                    <a href="{{ path('app_tracking_unit_list') }}" class="btn btn-default">Cancel</a>
+
+                    {{ form_widget(form.save,{'attr':{'class':'btn btn-primary'}}) }}
+                </div>
+            </div>
+
+        </footer>
+    {{ form_end(form) }}
+    {#{{  form(form, {'attr': {'novalidate': 'novalidate'}}) }}#}
+{% endblock %}

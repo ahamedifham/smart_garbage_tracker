@@ -1,0 +1,44 @@
+{% trans_default_domain "backend" %}
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            {#<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>#}
+            {#<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>#}
+        </div>
+
+        <h2 class="panel-title">{% trans %}User Package Information{% endtrans %}</h2>
+    </header>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped mb-none" id="datatable-default">
+            <thead>
+            <tr>
+                <th>{% trans %}common_user_package_info_common_user_package_name{% endtrans %}</th>
+                <th>{% trans %}common_user_package_info_common_user_package_description{% endtrans %}</th>
+                <th>{% trans %}common_user_package_info_common_user_package_fee{% endtrans %}</th>
+                <th>{% trans %}common_user_package_info_common_user_package_frequency{% endtrans %}</th>
+                <th>{% trans %}common_user_package_info_common_user_package_tax_percentage{% endtrans %}</th>
+                <th>{% trans %}action_list{% endtrans %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for record in list %}
+                <tr>
+                    <td>{{ record.name }}</td>
+                    <td>{{ record.description}}</td>
+                    <td>{{ record.fee }}</td>
+                    <td>{{ record.frequency }}</td>
+                    <td>{{ record.taxPercentage }}</td>
+
+                    <td>
+                        <a href="{{ url('app_common_user_package_edit',{id: record.id}) }}"class="btn btn-default btn-sm" style="max-height: 50px; min-width: 70px;">
+                            <i class="fa fa-edit"> </i> {% trans %} edit{% endtrans %}</a>
+                        <a href="{{ url('app_common_user_package_delete',{id: record.id}) }}"class="btn btn-default btn-sm" style="max-height: 50px; min-width: 70px;">
+                            <i class="fa fa-close"> </i> {% trans %} delete{% endtrans %}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</section>

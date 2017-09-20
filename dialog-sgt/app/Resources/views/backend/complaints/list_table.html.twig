@@ -1,0 +1,44 @@
+{% trans_default_domain "backend" %}
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            {#<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>#}
+            {#<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>#}
+        </div>
+
+        <h2 class="panel-title">{% trans %}Complaints Information{% endtrans %}</h2>
+    </header>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped mb-none" id="datatable-default">
+            <thead>
+            <tr>
+                <th>{% trans %}complaints_info_complaints_id{% endtrans %}</th>
+                <th>{% trans %}complaints_info_complaints_common_user{% endtrans %}</th>
+                <th>{% trans %}complaints_info_complaints_date{% endtrans %}</th>
+                <th>{% trans %}complaints_info_complaints_time{% endtrans %}</th>
+                <th>{% trans %}complaints_info_complaints_description{% endtrans %}</th>
+                <th>{% trans %}action_list{% endtrans %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for record in list %}
+                <tr>
+                    <td>{{ record.id }}</td>
+                    <td>{{ record.commonUser }}</td>
+                    <td>{{ record.date|date('Y-m-d') }}</td>
+                    <td>{{ record.time|date('H:i:s')}}</td>
+                    <td>{{ record.description }}</td>
+
+                    <td>
+                        <a href="{{ url('app_complaints_edit',{id: record.id}) }}"class="btn btn-default btn-sm" style="max-height: 50px; min-width: 70px;">
+                            <i class="fa fa-edit"> </i> {% trans %} edit{% endtrans %}</a>
+                        <a href="{{ url('app_complaints_delete',{id: record.id}) }}"class="btn btn-default btn-sm" style="max-height: 50px; min-width: 70px;">
+                            <i class="fa fa-close"> </i> {% trans %} delete{% endtrans %}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</section>

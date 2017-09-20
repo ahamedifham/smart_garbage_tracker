@@ -1,0 +1,129 @@
+{% trans_default_domain "backend" %}
+<section class="panel">
+    <header class="panel-heading">
+        <div class="panel-actions">
+            {#<a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>#}
+            {#<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>#}
+        </div>
+
+        <h2 class="panel-title">{% trans %}end_point_list{% endtrans %}</h2>
+    </header>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped mb-none" id="datatable-default">
+            <thead>
+            <tr>
+                <th>{% trans %}end_point_info_end_point_name{% endtrans %}</th>
+                <th>{% trans %}end_point_info_end_point_description{% endtrans %}</th>
+                <th>{% trans %}end_point_info_end_point_lat{% endtrans %}</th>
+                <th>{% trans %}end_point_info_end_point_lng{% endtrans %}</th>
+                <th>{% trans %}action_list{% endtrans %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for record in list %}
+                <tr>
+                    <td>{{ record.name }}</td>
+                    <td>{{ record.description}}</td>
+                    <td>{{ record.lat}}</td>
+                    <td>{{ record.lng }}</td>
+                    <td>
+                        <a class="mb-xs mt-xs mr-xs modal-sizes btn btn-default btn-sm map_button" href="#mapModal">
+                            <i class="glyphicon glyphicon-map-marker"></i> Map</a>
+                        <a href="{{ url('app_end_point_edit',{id: record.id}) }}"class="btn btn-default btn-sm">
+                            <i class="fa fa-edit"></i> Edit</a>
+                        <a href="{{ url('app_end_point_delete',{id: record.id}) }}"class="btn btn-default btn-sm">
+                            <i class="fa fa-close"></i> {% trans %}delete{% endtrans %}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</section>
+<div id="mapModal" class="modal-block modal-block-full mfp-hide">
+    <section class="panel">
+
+        <header class="panel-heading">
+            <h2 class="panel-title">
+                Map Panel
+
+                <div class="btn-group pull-right">
+                    {#<button type="button" class="btn btn-default btn-hover-me button:active menu_toolbar_tool start_point" data-tool-name="startPoint">#}
+                        {#<img src="{{ asset('backend/assets/images/maps/startPoint.png') }}" style="height:20px;width:20px;"> Start Point</button>#}
+                    {#<button type="button" class="btn btn-default btn-hover-me menu_toolbar_tool collection_point" data-tool-name="collectionPoint">#}
+                        {#<img src="{{ asset('backend/assets/images/maps/collectionPoint.png') }}" style="height:20px;width:20px;">Collection Point</button>#}
+                    {#<button type="button" class="btn btn-default btn-hover-me menu_toolbar_tool end_point" data-tool-name="endPoint">#}
+                        {#<img src="{{ asset('backend/assets/images/maps/endPoint.png') }}" style="height:20px;width:20px;">End Point</button>#}
+                    {#<button type="button" class="btn btn-default btn-hover-me menu_toolbar_tool" data-tool-name="dumpPoint">#}
+                        {#<img src="{{ asset('backend/assets/images/maps/dumpPoint.png') }}" style="height:20px;width:20px;">Dump Point</button>#}
+                    <button type="button" class="btn btn-default btn-hover-me menu_toolbar_tool" data-tool-name="recyclingPoint">
+                        <img src="{{ asset('backend/assets/images/maps/recyclingPoint.png') }}" style="height:20px;width:20px;"> Recycling Point</button>
+                    <button id="bbbbb" type="button" class="btn btn-default btn-hover-me menu_toolbar_tool delete_marker " data-tool-name="deletePoint">
+                        <img src="{{ asset('backend/assets/images/maps/deletePoint1.png') }}" style="height:20px;width:20px;"> Delete Point</button>
+
+                </div>
+            </h2>
+        </header>
+        <div id="mapModalBody" class="panel-body">
+            <div class="modal-wrapper">
+                <div class="modal-text">
+                    {#<script#}
+                    {#src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC-XxdWX3BWu-wE33Yf41K6R-v2ncRJgvk">#}
+
+                    {#</script>#}
+
+                    <script>
+
+                        //                        var myCenter=new google.maps.LatLng(2,-0.120850);
+                        //                        var markers = [];
+                        //                        var map;
+                        //
+                        //                        function initialize()
+                        //                        {
+                        //                            var mapProp = {
+                        //                                center:myCenter,
+                        //                                zoom:5,
+                        //                                mapTypeId:google.maps.MapTypeId.ROADMAP
+                        //                            };
+                        ////
+                        ////                            map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+                        ////                            var marker=new google.maps.Marker({
+                        ////                                position:myCenter,
+                        ////                            });
+                        ////
+                        ////                            marker.setMap(map);
+                        ////
+                        ////                            placeMarker(myCenter);
+                        ////
+                        ////                            google.maps.event.addListener(map, 'click', function(event) {
+                        ////                                placeMarker(event.latLng);
+                        ////                            });
+                        //                        }
+                        //
+                        //                        function placeMarker(location) {
+                        //                            var marker = new google.maps.Marker({
+                        //                                position: location,
+                        //                                map: map
+                        //                            });
+                        //                            markers.push(marker);
+                        //                        }
+                        //
+                        //                        google.maps.event.addDomListener(window, 'load', initialize);
+
+                    </script>
+                    <div id="googleMap" style="height:750px;" class=" col-centered panel-body "><span class="close">Close</span></div>
+
+                </div>
+            </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-primary modal-confirm">Confirm</button>
+                    <button class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>

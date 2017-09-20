@@ -1,0 +1,52 @@
+{% trans_default_domain "backend" %}
+<div class="panel-body">
+    {#<div class="col-sm-12 col-md-6">#}
+    {#<div class="dataTables_paginate paging_bs_normal" id="datatable-editable_paginate">#}
+    {#<ul class="pagination">#}
+    {#<li class="prev disabled">#}
+    {#<a href="#">#}
+    {#<span class="fa fa-chevron-left"></span>#}
+    {#</a>#}
+    {#</li>#}
+    {#<li class="active"><a href="#">1</a></li>#}
+    {#<li><a href="#">2</a></li>#}
+    {#<li><a href="#">3</a></li>#}
+    {#<li><a href="#">4</a></li>#}
+    {#<li><a href="#">5</a></li>#}
+    {#<li class="next">#}
+    {#<a href="#">#}
+    {#<span class="fa fa-chevron-right"></span>#}
+    {#</a>#}
+    {#</li>#}
+    {#</ul>#}
+    {#</div>#}
+    {#</div>#}
+    <div style="float: right">
+        <a class="btn btn-primary" href="{{ url('app_alert_generation_create') }}"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+        <a class="modal-with-form btn btn-success" href="#modalForm"><i class="fa fa-search" aria-hidden="true"></i></a>
+    </div>
+</div>
+<section class="panel modal-block modal-block-primary mfp-hide" id="modalForm">
+    <div class="panel-body">
+        <div style="padding-bottom:5%">
+            <header class="panel-heading">
+                <h2 class="panel-title">{% trans %}alert_generation_search{% endtrans %}</h2>
+            </header>
+        </div>
+        {{ form_start(searchForm,{'attr':{'class':'form-horizontal form-bordered'}}) }}
+        <div class="form-group form-bordered">
+            {{ form_label(searchForm.type ,null,{'label_attr':{'class':'col-md-2 control-label'}}) }}
+            <div class="col-md-4 form-bordered border-bottom:2px ">
+                {{ form_widget(searchForm.type,{'attr':{'class':'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="center">
+            {{ form_widget(searchForm.search,{'attr':{'class':'col-md-2  btn-sm pull-right btn btn-primary'}}) }}
+        </div>
+        {{ form_end(searchForm)}}
+        <div style="float: right;padding-right: 2px">
+            <button  class="btn-sm btn btn-danger modal-dismiss">Cancel</button>
+        </div>
+    </div>
+</section>

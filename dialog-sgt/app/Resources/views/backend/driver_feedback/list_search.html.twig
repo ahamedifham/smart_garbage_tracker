@@ -1,0 +1,34 @@
+{% trans_default_domain "backend" %}
+<div class="panel-body">
+    <div style="float: right">
+        {#<a class="btn btn-primary" href="{{ url('app_driver_feedback_create') }}"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>#}
+        <a class="modal-with-form btn btn-success" href="#modalForm"><i class="fa fa-search" aria-hidden="true" title="Search Feedback"></i></a>
+    </div>
+</div>
+
+
+<section class="panel modal-block modal-block-primary mfp-hide" id="modalForm">
+    <div class="panel-body">
+        <div style="padding-bottom:5%">
+            <header class="panel-heading">
+                <h2 class="panel-title">{% trans %}driver_feedback_search{% endtrans %}</h2>
+            </header>
+        </div>
+        {{ form_start(searchForm,{'attr':{'class':'form-horizontal form-bordered'}}) }}
+
+        <div class="form-group">
+            {{ form_label(searchForm.driver ,null,{'label_attr':{'class':'col-md-2 control-label'}}) }}
+            <div class="col-md-4">
+                {{ form_widget(searchForm.driver,{'attr':{'class':''}}) }}
+            </div>
+
+        </div>
+        <div class="center">
+            {{ form_widget(searchForm.search,{'attr':{'class':'col-md-2  btn-sm pull-right btn btn-primary'}}) }}
+        </div>
+        {{ form_end(searchForm)}}
+        <div style="float: right;padding-right: 2px">
+            <button  class="btn-sm btn btn-danger modal-dismiss">Cancel</button>
+        </div>
+    </div>
+</section>

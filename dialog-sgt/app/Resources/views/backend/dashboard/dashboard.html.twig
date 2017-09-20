@@ -1,0 +1,326 @@
+{% extends 'backend/base.html.twig' %}
+{% trans_default_domain "backend" %}
+
+{% block content %}
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="row">
+            <div class="col-md-8 col-lg-4 col-xl-4">
+                <section class="panel panel-featured-left panel-featured-quartenary">
+                    <div class="panel-body">
+                        <div class="widget-summary">
+                            <div class="widget-summary-col widget-summary-col-icon">
+                                <div class="summary-icon bg-quartenary">
+                                    <i class="glyphicon glyphicon-road"></i>
+                                </div>
+                            </div>
+                            <div class="widget-summary-col">
+                                <div class="summary" style="white-space: nowrap;">
+                                    <h4 class="title">Operational Active Routes</h4>
+                                    <div class="info" style="white-space: nowrap;">
+                                        <strong class="amount">{{ schedule_no }}</strong>
+                                    </div>
+                                </div>
+                                <div class="summary-footer">
+                                    <a class="text-muted text-uppercase">(report)</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-8 col-lg-4 col-xl-4">
+                <section class="panel panel-featured-left panel-featured-quartenary">
+                    <div class="panel-body">
+                        <div class="widget-summary">
+                            <div class="widget-summary-col widget-summary-col-icon">
+                                <div class="summary-icon bg-quartenary">
+                                    <i class="fa fa-truck"></i>
+                                </div>
+                            </div>
+                            <div class="widget-summary-col">
+                                <div class="summary" style="white-space: nowrap;">
+                                    <h4 class="title">Operational Active Trucks</h4>
+                                    <div class="info">
+                                        <strong class="amount">1</strong>
+                                    </div>
+                                </div>
+                                <div class="summary-footer">
+                                    <a class="text-muted text-uppercase">(report)</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            {#<div class="col-md-8 col-lg-4 col-xl-4">#}
+                {#<section class="panel panel-featured-left panel-featured-quartenary">#}
+                    {#<div class="panel-body">#}
+                        {#<div class="widget-summary">#}
+                            {#<div class="widget-summary-col widget-summary-col-icon">#}
+                                {#<div class="summary-icon bg-quartenary">#}
+                                    {#<i class="fa fa-commenting"></i>#}
+                                {#</div>#}
+                            {#</div>#}
+                            {#<div class="widget-summary-col">#}
+                                {#<div class="summary">#}
+                                    {#<h4 class="title">Unread Complaints</h4>#}
+                                    {#<div class="info">#}
+                                        {#<strong class="amount">33</strong>#}
+                                    {#</div>#}
+                                {#</div>#}
+                                {#<div class="summary-footer">#}
+                                    {#<a class="text-muted text-uppercase">(report)</a>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</section>#}
+            {#</div>#}
+        </div>
+    </div>
+<div class="col-md-12 col-lg-12 col-xl-12">
+    <section class="panel">
+        <header class="panel-heading">
+            <h2 class="panel-title">
+                {{ table_title }}
+            </h2>
+        </header>
+    <div class="panel-body">
+        {% if schedule_no  !=0 %}
+            <table class="table table-bordered table-striped mb-none" id="datatable-default">
+                <thead>
+                <tr>
+                    <th>{% trans %}complaints_info_complaints_common_user{% endtrans %}</th>
+                    <th>{% trans %}complaints_info_complaints_date{% endtrans %}</th>
+                    <th>{% trans %}complaints_info_complaints_description{% endtrans %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for record in list %}
+                    <tr>
+                        <td>{{ record.commonUser }}</td>
+                        <td>{{ record.date|date('Y-m-d') }}</td>
+                        <td>{{ record.description }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+        </section>
+
+    </div>
+        <div class="col-md-12 col-lg-12 col-xl-12">
+            {#<section class="panel">#}
+                {#<div class="panel-body">#}
+                    {#<div class="row">#}
+                        {#<div class="col-lg-12">#}
+                            {#<div class="chart-data-selector" id="salesSelectorWrapper">#}
+                                {#<div id="salesSelectorItems" class="chart-data-selector-items mt-sm">#}
+                                    {#<!-- Flot: Sales Porto Admin -->#}
+                                    {#<div class="chart chart-sm" data-sales-rel="Porto Admin" id="flotDashSales1" class="chart-active"></div>#}
+                                    {#<script>#}
+
+                                        {#var flotDashSales1Data = [{#}
+                                            {#data: [#}
+                                                {#["Jan", 140],#}
+                                                {#["Feb", 240],#}
+                                                {#["Mar", 190],#}
+                                                {#["Apr", 140],#}
+                                                {#["May", 180],#}
+                                                {#["Jun", 320],#}
+                                                {#["Jul", 270],#}
+                                                {#["Aug", 180],#}
+                                                {#["Sep", 320],#}
+                                                {#["Oct", 270],#}
+                                                {#["Nov", 280],#}
+                                                {#["Dec", 380]#}
+                                            {#],#}
+                                            {#color: "#0088cc"#}
+                                        {#}];#}
+
+                                        {#// See: assets/javascripts/dashboard/examples.dashboard.js for more settings.#}
+
+                                    {#</script>#}
+                                {#</div>#}
+
+                            {#</div>#}
+
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</section>#}
+            {#<section class="panel">#}
+                {#<header class="panel-heading">#}
+                    {#<div class="panel-actions">#}
+                        {#<a href="#" class="panel-action panel-action-toggle" data-panel-toggle=""></a>#}
+                        {#<a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss=""></a>#}
+                    {#</div>#}
+                    {#<h2 class="panel-title">Bird Eye View</h2>#}
+                {#</header>#}
+                {#<div class="panel-body">#}
+                    {#<a class="mb-xs mt-xs mr-xs modal-sizes btn btn-default map_button btn-sm map-btn"  href="#mapModal">#}
+                        {#<i class="glyphicon glyphicon-map-marker"></i> Map</a>#}
+
+                {#</div>#}
+            {#</section>#}
+
+            {#<div id="mapModal" class="modal-block modal-block-full mfp-hide">#}
+                <section class="panel">
+                    <header class="panel-heading">
+                        <h2 class="panel-title">
+                            Overview
+                            {#<div class="btn-group pull-right">#}
+                                {#<button type="button" class="btn btn-default btn-hover-me button:active menu_toolbar_tool start_point" data-tool-name="startPoint">#}
+                                    {#<img src="{{ asset('backend/assets/images/maps/startpoint.png') }}" style="height:20px;width:20px;"> Start Point</button>#}
+                                {#<button type="button" class="btn btn-default btn-hover-me menu_toolbar_tool collection_point" data-tool-name="collectionPoint">#}
+                                    {#<img src="{{ asset('backend/assets/images/maps/pinPoint.png') }}" style="height:20px;width:20px;"> Pin Point</button>#}
+                                {#<button type="button" class="btn btn-default btn-hover-me menu_toolbar_tool end_point" data-tool-name="endPoint">#}
+                                    {#<img src="{{ asset('backend/assets/images/maps/endRoute.png') }}" style="height:20px;width:20px;"> End Point</button>#}
+                                {#<button id="bbbbb" type="button" class="btn btn-default btn-hover-me menu_toolbar_tool build_route " data-tool-name="dumpPoint">#}
+                                    {#<img src="{{ asset('backend/assets/images/maps/dumpPoint.png') }}" style="height:20px;width:20px;"> Dump Point</button>#}
+                                {#<button type="button" class="btn btn-default btn-hover-me menu_toolbar_tool" data-tool-name="recyclingPoint">#}
+                                    {#<img src="{{ asset('backend/assets/images/maps/recyclePoint.png') }}" style="height:20px;width:20px;"> Recycling Point</button>#}
+                                {#<button type="button" class="btn btn-default btn-hover-me menu_toolbar_tool" data-tool-name="deletePoint">#}
+                                    {#<img src="{{ asset('backend/assets/images/maps/holderRemover.png') }}" style="height:20px;width:20px;"> Delete Point</button>#}
+
+                            {#</div>#}
+                        </h2>
+                    </header>
+                    <div id="mapModalBody" class="panel-body">
+                        <div class="modal-wrapper">
+                            <div class="modal-text">
+                                <div id="googleMap" style="min-height:650px;" class=" col-centered panel-body "><span class="close">Close</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            {#</div>#}
+
+
+
+        </div>
+{% endblock %}
+
+{% block map_js %}
+    <script type="text/javascript">
+        function initMap() {
+            var userLocationImg = {
+                url: '{{ asset('backend/assets/images/maps/truckLocationPoint.png') }}', // url
+                scaledSize: new google.maps.Size(28, 32), // scaled size
+                origin: new google.maps.Point(0,0), // origin
+                anchor: new google.maps.Point(0, 0) // anchor
+            };
+            var geocoder = new google.maps.Geocoder();
+            var map = new google.maps.Map(document.getElementById('googleMap'), {
+                center: {lat: 6.8817017, lng: 79.8675317},
+                zoom: 11
+            });
+//            geocoder.geocode( {'address' : 'Sri Lanka'}, function(results, status) {
+//                if (status == google.maps.GeocoderStatus.OK) {
+//                    map.setCenter(results[0].geometry.location);
+//                }
+//            });
+            var markers = [];
+            $.post('{{ url('app_mongo_route_get_scheduled_routes') }}', {id: 1}, function (reply) {
+                reply = JSON.parse(reply);
+                console.log(reply);
+                for (var i = 0; i < reply.length; i++) {
+                $.post('{{ url('app_mongo_fetch_route_path') }}', {id: reply[i]}, function (reply) {
+                    pinPoints = JSON.parse(reply);
+                    mapPoints =[];
+                    for (var k=0 ; k<pinPoints.length;k++){
+                        var tempLocation = {lat:pinPoints[k][0] , lng:pinPoints[k][1]};
+                        mapPoints.push(tempLocation);
+                    }
+                    console.log(mapPoints[8]);
+                    var flightPath = new google.maps.Polyline({
+                        path: mapPoints,
+                        geodesic: true,
+                        strokeColor: '#0000FF',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 4
+                    });
+                    flightPath.setMap(map);
+                });
+            }
+            });
+            setInterval(function () {
+                $.post('{{ url('app_dashboard_get_truck_location') }}',function (reply) {
+                    reply = JSON.parse(reply);
+                    $.each(markers,function (index, value) {
+                        value.setMap(null);
+                    });
+                    $.each(reply,function (index, value) {
+                        var infowindow = new google.maps.InfoWindow();
+                        var uluru = {lat: value.lat, lng: value.lng};
+                        var marker = new google.maps.Marker({
+                            position: uluru,
+                            map: map
+                        });
+                        marker.setIcon(userLocationImg);
+
+
+//                        google.maps.event.addListener(marker, 'click', function() {
+                            infowindow.setContent('<div><strong>' + value.msisdn, '</div>');
+                            infowindow.open(map, marker);
+//                        });
+                        markers.push(marker);
+
+                    });
+
+                });
+            },2000);
+        }
+    </script>
+    <script async defer src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC-XxdWX3BWu-wE33Yf41K6R-v2ncRJgvk&callback=initMap"></script>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        jQuery.validator.addMethod('confirmPwCheck',function (value,element) {
+            return value != '' && value == $('#app_bundle_dashbord_password').val()
+        },'{% trans %}dashboard_password_confirm_msg{% endtrans %}');
+
+        validationRules["app_bundle_common_user[passwordConfirm]"] = {confirmPwCheck:true};
+    </script>
+
+    <script type="text/javascript">
+        //        var mapCenterLat;
+        //        var mapCenterLng;
+
+        var mapConfig = {
+            icons:{
+                pins:{
+                    red: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|7575FE",
+                    green: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|75FE75",
+                    blue: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|7575FE"
+                },
+                startPoint: "{{ asset('backend/assets/images/maps/startpoint.png') }}",
+                endPoint: "{{ asset('backend/assets/images/maps/endRoute.png') }}",
+                collectionPoint: "{{ asset('backend/assets/images/maps/pinPoint.png') }}",
+                routePoint: "{{ asset('backend/assets/images/maps/worldwide.png') }}",
+                destinationPoint: "{{ asset('backend/assets/images/maps/flag.png') }}",
+                deletePoint: "{{ asset('backend/assets/images/maps/deletePoint.png') }}",
+                dumpPoint:  "{{ asset('backend/assets/images/maps/dumpPoint.png') }}",
+                recyclingPoint:  "{{ asset('backend/assets/images/maps/recyclePoint.png') }}",
+
+            }
+        };
+
+
+        var pathCreate = '{{ path('app_mongo_create_loop') }}';
+        var pathShow = '{{ path('app_mongo_fetch_route') }}';
+        var pathUpdate = '{{ path('app_mongo_route_update') }}';
+        var pathGetRouteId =  '{{ path('app_route_find_id') }}';
+        var updateRouteId = '{{ path('app_route_update_id') }}';
+        var dumpShow = '{{ path('app_mongo_fetch_dump') }}';
+        var recyclingShow ='{{ path('app_mongo_fetch_recycling') }}';
+
+
+    </script>
+    <script type="text/javascript" src="{{ asset('backend/assets/javascripts/map/map_ui_handle_base.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('backend/assets/javascripts/draw_route/dashboard_events.js') }}"></script>
+
+{% endblock %}
