@@ -1,0 +1,8 @@
+[{"number": "76XXXXXXX","name": "Device 1","lon": "81.1736608","lat": "6.8873353","icon": "5","state": "on","timestamp": "2015-10-01 11:21:52","paymentStatus": "Active","deviceType": "GPS","restrictedLocation": false}]
+[{"number": "76XXXXXXX","name": "Device 2","lon": "82.2736608","lat": "6.8873353","icon": "5","state": "on","timestamp": "2015-10-01 11:21:51","paymentStatus": "Active","deviceType": "GPS","restrictedLocation": false}]
+[{"number": "76XXXXXXX","name": "Device 3","lon": "83.2736608","lat": "6.8873353","icon": "5","state": "on","timestamp": "2015-10-01 11:21:51","paymentStatus": "Active","deviceType": "GPS","restrictedLocation": false}]
+[{"number": "76XXXXXXX","name": "Device 4","lon": "84.2736608","lat": "6.8873353","icon": "5","state": "on","timestamp": "2015-10-01 11:21:51","paymentStatus": "Active","deviceType": "GPS","restrictedLocation": false}]
+[{"number": "76XXXXXXX","name": "Device 1","lon": "81.2736608","lat": "6.8873353","icon": "5","state": "on","timestamp": "2015-10-01 11:21:51","paymentStatus": "Active","deviceType": "GPS","restrictedLocation": false}]
+[{"number": "76XXXXXXX","name": "Device 2","lon": "82.1736608","lat": "6.8873353","icon": "5","state": "on","timestamp": "2015-10-01 11:21:51","paymentStatus": "Active","deviceType": "GPS","restrictedLocation": false}]
+[{"number": "76XXXXXXX","name": "Device 3","lon": "83.1736608","lat": "6.8873353","icon": "5","state": "on","timestamp": "2015-10-01 11:21:51","paymentStatus": "Active","deviceType": "GPS","restrictedLocation": false}]
+[{"number": "76XXXXXXX","name": "Device 4","lon": "84.1736608","lat": "6.8873353","icon": "5","state": "on","timestamp": "2015-10-01 11:21:51","paymentStatus": "Active","deviceType": "GPS","restrictedLocation": false}]
